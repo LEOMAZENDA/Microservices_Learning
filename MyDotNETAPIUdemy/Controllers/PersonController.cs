@@ -4,6 +4,8 @@ using MyDotNETAPIUdemy.Services;
 
 namespace MyDotNETAPIUdemy.Controllers
 {
+    [ApiController]
+    [Route("api/[controller]")]
     public class PersonController : Controller
     {
         private readonly ILogger<PersonController> _logger;

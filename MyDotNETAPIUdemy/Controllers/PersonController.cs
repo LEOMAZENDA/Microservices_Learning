@@ -11,7 +11,7 @@ namespace MyDotNETAPIUdemy.Controllers
         private readonly ILogger<PersonController> _logger;
         private readonly IPersonService _personService;
 
-        public PersonController(ILogger<PersonController> logger, IPersonService personService)
+        public PersonController(ILogger<PersonController> logger, IPersonService personService) 
         {
             _logger = logger;
             _personService = personService;
@@ -24,33 +24,28 @@ namespace MyDotNETAPIUdemy.Controllers
         }
 
         [HttpGet("{id}")]
-        public IActionResult Get(long id)
-        {
+        public IActionResult Get(long id) {
             var person = _personService.FindById(id);
             if (person == null) return NotFound();
             return Ok(person);
         }
 
         [HttpPost]
-        public IActionResult Post([FromBody] Person person)
-        {
+        public IActionResult Post([FromBody] Person person) {
             if (person == null) return BadRequest();
             return Ok(_personService.Create(person));
         }
 
         [HttpPut]
-        public IActionResult Put([FromBody] Person person)
-        {
+        public IActionResult Put([FromBody] Person person) {
             if (person == null) return BadRequest();
             return Ok(_personService.Udate(person));
         }
 
         [HttpDelete("{id}")]
-        public IActionResult Delete(long id)
-        {
+        public IActionResult Delete(long id) {
             _personService.Delete(id);
             return NoContent();
         }
-
     }
 }

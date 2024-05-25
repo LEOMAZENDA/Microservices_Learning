@@ -1,8 +1,5 @@
-# Microservices_Learning
+Olá!
 
-Oi 
+Nos últimos dias, tenho mergulhado no aprendizado de Microserviços através do curso do Leandro Costa na plataforma Udemy. Você pode encontrar o curso neste link > https://www.udemy.com/course/microservices-do-0-a-gcp-com-dot-net-6-kubernetes-e-docker/
 
-Nos Ultimos dias tenho mergulhado no aprendizado de Microservicos atravez do curso do  Leandro Costa na Plataforma Udemy no link https://www.udemy.com/share/105tjD3@nIICDCTE_xHU8bQbk4lvEtWWIc9Pf1OQxBHcDFiPIkUwlunkucpDmVcBjnBR09-rjw==/
-
-tem sido uma experiencia boa, pos estou com esse curso migrando de aplica;oes acopladas para destribuidas.
-
+Tem sido uma experiência excelente, pois estou utilizando esse curso para migrar de aplicações monolíticas para arquiteturas distribuídas.

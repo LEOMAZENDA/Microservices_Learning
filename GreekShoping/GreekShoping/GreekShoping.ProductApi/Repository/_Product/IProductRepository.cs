@@ -1,6 +1,6 @@
 ﻿using GreekShoping.ProductApi.Data.ValueObjects;
 
-namespace GreekShoping.ProductApi.Repository;
+namespace GreekShoping.ProductApi.Repository._Product;
 
 public interface IProductRepository
 {

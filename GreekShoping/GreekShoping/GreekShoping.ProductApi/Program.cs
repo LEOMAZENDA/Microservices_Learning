@@ -1,3 +1,5 @@
+using AutoMapper;
+using GreekShoping.ProductApi.Config;
 using GreekShoping.ProductApi.Models.Context;
 using Microsoft.EntityFrameworkCore;
 
@@ -7,7 +9,12 @@ var builder = WebApplication.CreateBuilder(args);
 var conecction = builder.Configuration["MySqlConnection:MySqlConnectionString"];
 
 builder.Services.AddDbContext<MySqlContext>(options => options.UseMySql(
-    conecction, new MySqlServerVersion(new Version(8, 4, 0))));
+              conecction, new MySqlServerVersion(new Version(8, 4, 0))));
+
+//Injectando dependencias do AutoMapper
+IMapper mapper = MappingConfig.RegisterMaps().CreateMapper();
+builder.Services.AddSingleton(mapper);
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

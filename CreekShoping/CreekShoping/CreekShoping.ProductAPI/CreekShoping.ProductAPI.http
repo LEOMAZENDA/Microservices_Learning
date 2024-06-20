@@ -1,6 +1,0 @@
-@CreekShoping.ProductAPI_HostAddress = http://localhost:5155
-
-GET {{CreekShoping.ProductAPI_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###

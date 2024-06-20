@@ -26,7 +26,7 @@ public class ProductController : ControllerBase
     public async Task<ActionResult<ProductVO>> FindById(long id)
     {
         var prod = await _repository.FindById(id);
-        if (prod == null) return NotFound();
+        if (prod.Id <= 0) return NotFound("Não existe producto com o valor passado");
         return Ok(prod);
     }
 
@@ -50,7 +50,7 @@ public class ProductController : ControllerBase
     public async Task<ActionResult> Delete(long id)
     {
         var status = await _repository.Delete(id);
-        if (!status) return BadRequest();
+        if (!status) return BadRequest("Não existe producto com o valor passado");
         return Ok(status);
     }
 

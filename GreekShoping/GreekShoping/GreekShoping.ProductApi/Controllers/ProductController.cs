@@ -29,4 +29,29 @@ public class ProductController : ControllerBase
         if (prod == null) return NotFound();
         return Ok(prod);
     }
+
+    [HttpPost]
+    public async Task<ActionResult<ProductVO>> Create(ProductVO vO)
+    {
+        if (vO == null) return BadRequest();
+        var prod = await _repository.Create(vO);
+        return Ok(prod);
+    }
+
+    [HttpPut]
+    public async Task<ActionResult<ProductVO>> Update(ProductVO vO)
+    {
+        if (vO == null) return BadRequest();
+        var prod = await _repository.Update(vO);
+        return Ok(prod);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<ActionResult> Delete(long id)
+    {
+        var status = await _repository.Delete(id);
+        if (!status) return BadRequest();
+        return Ok(status);
+    }
+
 }

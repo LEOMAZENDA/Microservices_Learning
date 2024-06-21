@@ -57,5 +57,23 @@ namespace GreekShoping.Web.Controllers
             }
             return View(model);
         }
+        
+        [HttpGet]
+        public async Task<IActionResult> ProductDelete(long id)
+        {
+            var model = await _productService.FindAllProductById(id);
+            if (model != null) return View(model);
+            return NotFound();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ProductDelete(ProductModel model)
+        {
+            var response = await _productService.DeleteProductById(model.Id);
+                if (response) 
+                    return RedirectToAction(nameof(ProductIndex));
+            return View(model);
+        }
+
     }
 }

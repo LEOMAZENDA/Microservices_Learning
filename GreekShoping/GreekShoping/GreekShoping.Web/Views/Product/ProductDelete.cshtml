@@ -1,0 +1,65 @@
+﻿@model GreekShoping.Web.Models.ProductModel
+
+<form asp-action="ProductDelete">
+    <div class="container py-4">
+        <div class="card shadow">
+            <div class="card-header bg-secondary text-white text-xl-center">
+                <h1 class="mb-0">Delete Product</h1>
+            </div>
+            <div class="card-body">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Name:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input asp-for="Name" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Category:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input asp-for="CategoryName" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Description:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <textarea asp-for="Description" class="form-control" rows="5" readonly></textarea>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Image URL:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input asp-for="ImageUrl" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <label class="form-label">Price:</label>
+                    </div>
+                    <div class="col-md-9">
+                        <input asp-for="Price" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="card-footer">
+                <div class="row">
+                    <div class="col-md-6">
+                        <a asp-action="ProductIndex" class="btn btn-secondary btn-block">Back to List</a>
+                        <button type="submit" class="btn btn-danger btn-block">Delete</button>
+                    </div>                   
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial">
+}

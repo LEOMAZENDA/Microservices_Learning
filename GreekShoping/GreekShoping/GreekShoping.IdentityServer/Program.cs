@@ -1,4 +1,5 @@
 using GreekShoping.IdentityServer.Configuration;
+using GreekShoping.IdentityServer.Inicializer;
 using GreekShoping.IdentityServer.Model;
 using GreekShoping.IdentityServer.Model.Context;
 using Microsoft.AspNetCore.Identity;
@@ -16,25 +17,29 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<MySqlContext>()
     .AddDefaultTokenProviders();
 
-var builder2 = builder.Services.AddIdentityServer(opts =>
+var builderService = builder.Services.AddIdentityServer(options =>
 {
-    opts.Events.RaiseErrorEvents = true;
-    opts.Events.RaiseInformationEvents = true;
-    opts.Events.RaiseFailureEvents = true;
-    opts.Events.RaiseSuccessEvents = true;
-    opts.EmitStaticAudienceClaim = true;
-}).AddInMemoryIdentityResources(
-    IdentityConfiguration.IdentityResources)
+    options.Events.RaiseErrorEvents = true;
+    options.Events.RaiseInformationEvents = true;
+    options.Events.RaiseFailureEvents = true;
+    options.Events.RaiseSuccessEvents = true;
+    options.EmitStaticAudienceClaim = true;
+})
+    .AddInMemoryIdentityResources(IdentityConfiguration.IdentityResources)
     .AddInMemoryApiScopes( IdentityConfiguration.ApiScopes)
     .AddInMemoryClients(IdentityConfiguration.Clients)
     .AddAspNetIdentity<ApplicationUser>();
-builder2.AddDeveloperSigningCredential();
 
+builder.Services.AddScoped<IDbInicializer, DbInicializer>();
+
+builderService.AddDeveloperSigningCredential();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
+
+var inicializer = app.Services.CreateScope().ServiceProvider.GetService<IDbInicializer>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -45,8 +50,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
 app.UseIdentityServer();
+
 app.UseAuthorization();
+
+inicializer.Inicialize();
 
 app.MapControllerRoute(
     name: "default",

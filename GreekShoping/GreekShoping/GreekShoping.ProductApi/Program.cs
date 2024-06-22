@@ -46,8 +46,7 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen(c =>
 {
     c.EnableAnnotations();
-    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-    {
+    c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme {
         Description = @"Enter 'Bearer' [scapece] and your token",
         Name = "Authorization",
         In = ParameterLocation.Header,

@@ -7,8 +7,7 @@ builder.Services.AddHttpClient<IProductService, ProductService>(c =>
     c.BaseAddress = new Uri(builder.Configuration["ServicesUrls:ProductAPI"])
     );
 
-builder.Services.AddAuthentication(options =>
-{
+builder.Services.AddAuthentication(options => {
     options.DefaultScheme = "Cookies";
     options.DefaultChallengeScheme = "oidc";
 })

@@ -6,7 +6,7 @@ namespace GreekShoping.IdentityServer.Configuration;
 public static class IdentityConfiguration
 {
     public const string Admin = "Admin";
-    public const string Costumer = "Costumer";
+    public const string Client = "Client";
 
     // Corrigindo o retorno dos IdentityResources
     public static IEnumerable<IdentityResource> IdentityResources =>
@@ -28,7 +28,7 @@ public static class IdentityConfiguration
          };
 
     // Corrigindo o Cliente 
-    public static IEnumerable<Client> Client =>
+    public static IEnumerable<Client> Clients =>
         new List<Client>
         {
              // Use uma strin complexa no lugar de my_super_secret para não comprometer a segurança do token 
@@ -44,8 +44,8 @@ public static class IdentityConfiguration
                 ClientId ="greek_Shoping",
                 ClientSecrets = {new Secret ("my_super_secret".Sha256())},
                 AllowedGrantTypes = GrantTypes.Code,
-                RedirectUris = {"http://localhost:29120/signin-oidc"},
-                PostLogoutRedirectUris = {"http://localhost:29120/signout-callback-oidc"},
+                RedirectUris = {"https://localhost:4430/signin-oidc"},
+                PostLogoutRedirectUris = {"https://localhost:4430/signout-callback-oidc"},
                 AllowedScopes = new List<string>
                 {
                     IdentityServerConstants.StandardScopes.OpenId,

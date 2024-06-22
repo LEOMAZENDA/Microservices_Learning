@@ -1,4 +1,5 @@
-﻿using Duende.IdentityServer.Models;
+﻿using Duende.IdentityServer;
+using Duende.IdentityServer.Models;
 
 namespace GreekShoping.IdentityServer.Configuration;
 
@@ -37,6 +38,21 @@ public static class IdentityConfiguration
                 ClientSecrets = {new Secret ("my_super_secret".Sha256())},
                 AllowedGrantTypes = GrantTypes.ClientCredentials,
                 AllowedScopes = { "read", "write", "profile"}
+            },
+            new Client
+            {
+                ClientId ="greek_Shoping",
+                ClientSecrets = {new Secret ("my_super_secret".Sha256())},
+                AllowedGrantTypes = GrantTypes.Code,
+                RedirectUris = {"http://localhost:29120/signin-oidc"},
+                PostLogoutRedirectUris = {"http://localhost:29120/signout-callback-oidc"},
+                AllowedScopes = new List<string>
+                {
+                    IdentityServerConstants.StandardScopes.OpenId,
+                    IdentityServerConstants.StandardScopes.Email,
+                    IdentityServerConstants.StandardScopes.Profile,
+                    "greek_Shoping"
+                }
             }
         };
 

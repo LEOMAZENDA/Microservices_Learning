@@ -19,17 +19,25 @@ namespace GreekShoping.Web.Controllers
             _productService = productService ?? throw new ArgumentNullException(nameof(productService));
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
             var products = await _productService.FindAllProducts("");
             return View(products);
         }
 
         [Authorize]
+        public async Task<IActionResult> Details(int id)
+        {
+            var accessToken = await HttpContext.GetTokenAsync("access_token");
+            var model = await _productService.FindAllProductById(id, accessToken);
+            return View(model);
+        }
+
+        [Authorize]
         public async Task<IActionResult> Login()
         {
             var accessToken = await HttpContext.GetTokenAsync("access_token");
-            return RedirectToAction(nameof(IndexAsync));
+            return RedirectToAction(nameof(Index));
         }
         
         public IActionResult Logout()

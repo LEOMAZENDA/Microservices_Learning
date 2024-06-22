@@ -27,12 +27,12 @@ namespace GreekShoping.Web.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ProductCreate()
+        public IActionResult ProductCreate()
         {
             return View();
         }
 
-        [Authorize]
+        [Authorize(Role.Admin)]
         [HttpPost]
         public async Task<IActionResult> ProductCreate(ProductModel model)
         {
@@ -54,7 +54,7 @@ namespace GreekShoping.Web.Controllers
             return NotFound();
         }
 
-        [Authorize]
+        [Authorize(Role.Admin)]
         [HttpPost]
         public async Task<IActionResult> ProductUpdate(ProductModel model)
         {

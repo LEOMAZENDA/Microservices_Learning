@@ -2,24 +2,19 @@
 // See LICENSE in the project root for license information.
 
 
-using IdentityModel;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Linq;
-using System.Threading.Tasks;
 using Duende.IdentityServer;
 using Duende.IdentityServer.Events;
 using Duende.IdentityServer.Extensions;
 using Duende.IdentityServer.Models;
 using Duende.IdentityServer.Services;
 using Duende.IdentityServer.Stores;
-using Duende.IdentityServer.Test;
-using GreekShoping.IdentityServer.Model;
-using Microsoft.AspNetCore.Identity;
 using GreekShoping.IdentityServer.MainModule.Account;
+using GreekShoping.IdentityServer.Model;
+using IdentityModel;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
 
 namespace IdentityServerHost.Quickstart.UI
@@ -36,17 +31,20 @@ namespace IdentityServerHost.Quickstart.UI
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager;
-        
+
         private readonly IIdentityServerInteractionService _interaction;
         private readonly IClientStore _clientStore;
         private readonly IAuthenticationSchemeProvider _schemeProvider;
+        private readonly IIdentityProviderStore _identityProviderStore;
         private readonly IEventService _events;
 
         public AccountController(
             IIdentityServerInteractionService interaction,
             IClientStore clientStore,
             IAuthenticationSchemeProvider schemeProvider,
+            IIdentityProviderStore identityProviderStore,
             IEventService events,
+
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             RoleManager<IdentityRole> roleManager
@@ -55,6 +53,7 @@ namespace IdentityServerHost.Quickstart.UI
             _interaction = interaction;
             _clientStore = clientStore;
             _schemeProvider = schemeProvider;
+            _identityProviderStore = identityProviderStore;
             _events = events;
 
             _roleManager = roleManager;
@@ -124,15 +123,14 @@ namespace IdentityServerHost.Quickstart.UI
                     model.Password,
                     model.RememberLogin,
                     lockoutOnFailure: false);
-
                 if (result.Succeeded)
                 {
                     var user = await _userManager.FindByNameAsync(model.Username);
-                    await _events.RaiseAsync(new UserLoginSuccessEvent(
-                        user.UserName, 
-                        user.Id, 
-                        user.UserName, 
-                        clientId: context?.Client.ClientId));
+                    await _events.RaiseAsync(
+                        new UserLoginSuccessEvent(user.UserName,
+                            user.Id,
+                            user.UserName,
+                            clientId: context?.Client.ClientId));
 
                     // only set explicit expiration here if user chooses "remember me". 
                     // otherwise we rely upon expiration configured in cookie middleware.
@@ -183,7 +181,7 @@ namespace IdentityServerHost.Quickstart.UI
                     }
                 }
 
-                await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials", clientId:context?.Client.ClientId));
+                await _events.RaiseAsync(new UserLoginFailureEvent(model.Username, "invalid credentials", clientId: context?.Client.ClientId));
                 ModelState.AddModelError(string.Empty, AccountOptions.InvalidCredentialsErrorMessage);
             }
 
@@ -192,7 +190,7 @@ namespace IdentityServerHost.Quickstart.UI
             return View(vm);
         }
 
-        
+
         /// <summary>
         /// Show logout page
         /// </summary>
@@ -252,10 +250,6 @@ namespace IdentityServerHost.Quickstart.UI
             return View();
         }
 
-        /*****************************************/
-        /* helper APIs for the AccountController */
-        /*****************************************/
-
         [HttpGet]
         public async Task<IActionResult> Register(string returnUrl)
         {
@@ -273,6 +267,7 @@ namespace IdentityServerHost.Quickstart.UI
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
+
                 var user = new ApplicationUser
                 {
                     UserName = model.Username,
@@ -295,6 +290,7 @@ namespace IdentityServerHost.Quickstart.UI
                         };
                         await _roleManager.CreateAsync(userRole);
                     }
+
                     await _userManager.AddToRoleAsync(user, model.RoleName);
 
                     await _userManager.AddClaimsAsync(user, new Claim[]{
@@ -347,7 +343,6 @@ namespace IdentityServerHost.Quickstart.UI
             // If we got this far, something failed, redisplay form
             return View(model);
         }
-
 
         private async Task<RegisterViewModel> BuildRegisterViewModelAsync(string returnUrl)
         {
@@ -411,7 +406,9 @@ namespace IdentityServerHost.Quickstart.UI
             };
         }
 
-
+        /*****************************************/
+        /* helper APIs for the AccountController */
+        /*****************************************/
         private async Task<LoginViewModel> BuildLoginViewModelAsync(string returnUrl)
         {
             var context = await _interaction.GetAuthorizationContextAsync(returnUrl);
@@ -444,6 +441,15 @@ namespace IdentityServerHost.Quickstart.UI
                     DisplayName = x.DisplayName ?? x.Name,
                     AuthenticationScheme = x.Name
                 }).ToList();
+
+            var dyanmicSchemes = (await _identityProviderStore.GetAllSchemeNamesAsync())
+                .Where(x => x.Enabled)
+                .Select(x => new ExternalProvider
+                {
+                    AuthenticationScheme = x.Scheme,
+                    DisplayName = x.DisplayName
+                });
+            providers.AddRange(dyanmicSchemes);
 
             var allowLocal = true;
             if (context?.Client.ClientId != null)

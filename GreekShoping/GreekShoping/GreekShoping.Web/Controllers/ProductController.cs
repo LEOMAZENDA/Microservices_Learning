@@ -1,6 +1,7 @@
 ﻿using GreekShoping.Web.Models;
 using GreekShoping.Web.Services.IServices._ProductIServices;
 using GreekShoping.Web.Utils;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
@@ -20,7 +21,8 @@ namespace GreekShoping.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ProductIndex()
         {
-            var products = await _productService.FindAllProducts();
+            var token = await HttpContext.GetTokenAsync("access_token");
+            var products = await _productService.FindAllProducts(token);
             return View(products);
         }
 
@@ -36,7 +38,8 @@ namespace GreekShoping.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _productService.CreateProduct(model);
+                var token = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.CreateProduct(model, token);
                 if (response != null) return RedirectToAction(nameof(ProductIndex));
             }
             return View(model);
@@ -45,7 +48,8 @@ namespace GreekShoping.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ProductUpdate(long id)
         {
-            var model = await _productService.FindAllProductById(id);
+            var token = await HttpContext.GetTokenAsync("access_token");
+            var model = await _productService.FindAllProductById(id, token);
             if (model != null) return View(model);
             return NotFound();
         }
@@ -56,7 +60,8 @@ namespace GreekShoping.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var response = await _productService.UpdateProduct(model);
+                var token = await HttpContext.GetTokenAsync("access_token");
+                var response = await _productService.UpdateProduct(model, token);
                 if (response != null) 
                     return RedirectToAction(nameof(ProductIndex));
             }
@@ -67,7 +72,8 @@ namespace GreekShoping.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ProductDelete(long id)
         {
-            var model = await _productService.FindAllProductById(id);
+            var token = await HttpContext.GetTokenAsync("access_token");
+            var model = await _productService.FindAllProductById(id, token);
             if (model != null) return View(model);
             return NotFound();
         }
@@ -76,7 +82,8 @@ namespace GreekShoping.Web.Controllers
         [Authorize(Role.Admin)]
         public async Task<IActionResult> ProductDelete(ProductModel model)
         {
-            var response = await _productService.DeleteProductById(model.Id);
+            var token = await HttpContext.GetTokenAsync("access_token");
+            var response = await _productService.DeleteProductById(model.Id, token);
                 if (response) 
                     return RedirectToAction(nameof(ProductIndex));
             return View(model);

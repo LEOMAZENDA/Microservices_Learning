@@ -1,6 +1,6 @@
 ﻿namespace GreekShoping.IdentityServer.Inicializer
 {
-    public interface IDbInicializer
+    public interface IDbInitializer
     {
         public void Inicialize();
     }

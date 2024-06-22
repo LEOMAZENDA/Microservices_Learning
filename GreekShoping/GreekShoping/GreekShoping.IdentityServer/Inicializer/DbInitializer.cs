@@ -7,13 +7,13 @@ using System.Security.Claims;
 
 namespace GreekShoping.IdentityServer.Inicializer;
 
-public class DbInicializer : IDbInicializer
+public class DbInitializer : IDbInitializer
 {
     private readonly MySqlContext _context;
     private readonly UserManager<ApplicationUser> _user;
     private readonly RoleManager<IdentityRole> _role;
 
-    public DbInicializer(
+    public DbInitializer(
         MySqlContext context, 
         UserManager<ApplicationUser> user, 
         RoleManager<IdentityRole> role)
@@ -35,8 +35,8 @@ public class DbInicializer : IDbInicializer
         //A Criar um user Admin 
         ApplicationUser addmin = new ApplicationUser()
         {
-            UserName = "Leonildo-admin",
-            Email = "lvsagrado@gmail.com",
+            UserName = "leonildo.admin",
+            Email = "leonildo.admin@gmail.com",
             EmailConfirmed = true,
             PhoneNumber = "+244923684849",
             FirstName = "Leonildo",
@@ -59,8 +59,8 @@ public class DbInicializer : IDbInicializer
         //A Criar um user Cliente 
         ApplicationUser client = new ApplicationUser()
         {
-            UserName = "Leonildo-client",
-            Email = "eng.leomazenda@gmail.com",
+            UserName = "leonildo.client",
+            Email = "leonildo.client@gmail.com",
             EmailConfirmed = true,
             PhoneNumber = "+244923684849",
             FirstName = "Leonildo",

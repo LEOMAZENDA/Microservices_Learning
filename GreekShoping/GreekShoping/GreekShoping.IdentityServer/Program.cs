@@ -1,3 +1,5 @@
+using Duende.IdentityServer.Services;
+using GeekShoping.IdentityServer.Services;
 using GreekShoping.IdentityServer.Configuration;
 using GreekShoping.IdentityServer.Inicializer;
 using GreekShoping.IdentityServer.Model;
@@ -8,16 +10,19 @@ using Microsoft.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var conecction = builder.Configuration["MySqlConnection:MySqlConnectionString"];
+var connection = builder.Configuration["MySqlConnection:MySqlConnectionString"];
 
 builder.Services.AddDbContext<MySqlContext>(options => options.UseMySql(
-              conecction, new MySqlServerVersion(new Version(8, 4, 0))));
+    connection,
+    new MySqlServerVersion(new Version(8, 4, 0)))
+);
+
 
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>()
     .AddEntityFrameworkStores<MySqlContext>()
     .AddDefaultTokenProviders();
 
-var builderService = builder.Services.AddIdentityServer(options =>
+var builderServices = builder.Services.AddIdentityServer(options =>
 {
     options.Events.RaiseErrorEvents = true;
     options.Events.RaiseInformationEvents = true;
@@ -26,20 +31,22 @@ var builderService = builder.Services.AddIdentityServer(options =>
     options.EmitStaticAudienceClaim = true;
 })
     .AddInMemoryIdentityResources(IdentityConfiguration.IdentityResources)
-    .AddInMemoryApiScopes( IdentityConfiguration.ApiScopes)
+    .AddInMemoryApiScopes(IdentityConfiguration.ApiScopes)
     .AddInMemoryClients(IdentityConfiguration.Clients)
     .AddAspNetIdentity<ApplicationUser>();
 
-builder.Services.AddScoped<IDbInicializer, DbInicializer>();
 
-builderService.AddDeveloperSigningCredential();
+builder.Services.AddScoped<IDbInitializer, DbInitializer>();
+builder.Services.AddScoped<IProfileService, ProfileService>();
+
+builderServices.AddDeveloperSigningCredential();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
 
-var inicializer = app.Services.CreateScope().ServiceProvider.GetService<IDbInicializer>();
+var initializer = app.Services.CreateScope().ServiceProvider.GetService<IDbInitializer>();
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -55,7 +62,7 @@ app.UseIdentityServer();
 
 app.UseAuthorization();
 
-inicializer.Inicialize();
+initializer.Inicialize();
 
 app.MapControllerRoute(
     name: "default",

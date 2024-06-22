@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreekShoping.ProductApi.Migrations
 {
     [DbContext(typeof(MySqlContext))]
-    [Migration("20240620042257_SpeedProductsDataTable")]
-    partial class SpeedProductsDataTable
+    [Migration("20240622221459_DBProductApiCreate")]
+    partial class DBProductApiCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

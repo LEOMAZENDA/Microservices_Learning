@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GreekShoping.IdentityServer.Migrations
 {
-    public partial class AddDefauldSecretDataBases : Migration
+    public partial class DbIndentityServerCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

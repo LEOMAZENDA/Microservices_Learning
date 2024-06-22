@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreekShoping.IdentityServer.Migrations
 {
     [DbContext(typeof(MySqlContext))]
-    [Migration("20240622043604_AddDefauldSecretDataBases")]
-    partial class AddDefauldSecretDataBases
+    [Migration("20240622221516_DbIndentityServerCreate")]
+    partial class DbIndentityServerCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

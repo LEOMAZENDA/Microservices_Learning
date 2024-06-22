@@ -1,5 +1,7 @@
 ﻿using GreekShoping.Web.Models;
 using GreekShoping.Web.Services.IServices._ProductIServices;
+using GreekShoping.Web.Utils;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Reflection;
 
@@ -14,6 +16,7 @@ namespace GreekShoping.Web.Controllers
             _productService = productService ?? throw new ArgumentNullException(nameof(productService));
         }
 
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> ProductIndex()
         {
@@ -27,6 +30,7 @@ namespace GreekShoping.Web.Controllers
             return View();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ProductCreate(ProductModel model)
         {
@@ -46,6 +50,7 @@ namespace GreekShoping.Web.Controllers
             return NotFound();
         }
 
+        [Authorize]
         [HttpPost]
         public async Task<IActionResult> ProductUpdate(ProductModel model)
         {
@@ -57,7 +62,8 @@ namespace GreekShoping.Web.Controllers
             }
             return View(model);
         }
-        
+
+        [Authorize]
         [HttpGet]
         public async Task<IActionResult> ProductDelete(long id)
         {
@@ -67,6 +73,7 @@ namespace GreekShoping.Web.Controllers
         }
 
         [HttpPost]
+        [Authorize(Role.Admin)]
         public async Task<IActionResult> ProductDelete(ProductModel model)
         {
             var response = await _productService.DeleteProductById(model.Id);
@@ -74,6 +81,5 @@ namespace GreekShoping.Web.Controllers
                     return RedirectToAction(nameof(ProductIndex));
             return View(model);
         }
-
     }
 }

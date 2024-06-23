@@ -12,8 +12,8 @@ public class CartDetail :BaseEntity
     [ForeignKey("ProductId")]
     public long ProductId { get; set; }
 
-    public Product Product { get; set; }
-    public CartHeader CartHeader { get; set; }
+    public virtual Product Product { get; set; }
+    public virtual CartHeader CartHeader { get; set; }
 
     [Column("Count")]
     public int Count { get; set; }

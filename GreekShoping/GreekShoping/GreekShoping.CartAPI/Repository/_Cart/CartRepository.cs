@@ -16,32 +16,20 @@ public class CartRepository : ICartRepository
         _context = context;
         _mapper = mapper;
     }
-
-    public async Task<bool> ApplyCoupon(string userId, string couponCode)
+    public async Task<CartVO> FindCartByUserId(string userId) 
     {
-        throw new NotImplementedException();
+        Cart cart = new ()
+        {
+            CartHeader = await _context.CartHeaders
+            .FirstOrDefaultAsync(x => x.UserId == userId),
+        };
+        cart.CartDetails = _context.CartDetails
+            .Where(c => c.CartHeaderId == cart.CartHeader.Id)
+            .Include(c => c.Product);
+        
+        return _mapper.Map<CartVO>(cart);
     }
-
-    public async Task<bool> ClearCart(string userId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<CartVO> FindCartById(string userId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<bool> RemoveCoupon(string userId)
-    {
-        throw new NotImplementedException();
-    }
-
-    public async Task<bool> RemoveFromCart(long cartDetails)
-    {
-        throw new NotImplementedException();
-    }
-
+    
     public async Task<CartVO> SaveOrUpdateCart(CartVO vO)
     {
         Cart cart = _mapper.Map<Cart>(vO);
@@ -99,4 +87,53 @@ public class CartRepository : ICartRepository
         }
         return _mapper.Map<CartVO>(cart);
     }
+
+    public async Task<bool> RemoveFromCart(long cartDetailsId)
+    {
+        try
+        {
+            CartDetail cartDetail = await _context.CartDetails.FirstOrDefaultAsync(c => c.Id == cartDetailsId);
+            int total = _context.CartDetails.Where(c => c.CartHeaderId == cartDetail.CartHeaderId).Count();
+
+            _context.CartDetails.Remove(cartDetail);
+
+            if (total == 1)
+            {
+                var cartHeaderToRemove = await _context.CartHeaders
+                    .FirstOrDefaultAsync(c => c.Id == cartDetail.CartHeaderId);
+                _context.CartHeaders.Remove(cartHeaderToRemove);
+            }
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        catch (Exception)
+        {
+            return false;
+        }
+    }
+
+    public async Task<bool> ClearCart(string userId)
+    {
+        var cartHeader = await _context.CartHeaders.FirstOrDefaultAsync(c => c.UserId == userId);
+        if (cartHeader != null)
+        {
+            _context.CartDetails.RemoveRange(
+                _context.CartDetails.Where(c => c.CartHeaderId == cartHeader.Id));
+            _context.CartHeaders.Remove(cartHeader);
+            await _context.SaveChangesAsync();
+            return true;
+        }
+        return false;
+    }
+
+    public async Task<bool> ApplyCoupon(string userId, string couponCode)
+    {
+        throw new NotImplementedException();
+    }
+
+    public async Task<bool> RemoveCoupon(string userId)
+    {
+        throw new NotImplementedException();
+    }
+
 }

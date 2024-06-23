@@ -11,7 +11,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.ProductApi", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.Web", "GreekShoping.Web\GreekShoping.Web.csproj", "{0C8769A5-632A-452C-AB0C-5A15BFFCBD8B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreekShoping.IdentityServer", "GreekShoping.IdentityServer\GreekShoping.IdentityServer.csproj", "{9AA45468-D0B9-43C4-8C1A-CEF1CEBD112A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.IdentityServer", "GreekShoping.IdentityServer\GreekShoping.IdentityServer.csproj", "{9AA45468-D0B9-43C4-8C1A-CEF1CEBD112A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreekShoping.CartAPI", "GreekShoping.CartAPI\GreekShoping.CartAPI.csproj", "{4C577493-D8E6-48E7-A9E0-915F24BC4453}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SecurityServer", "SecurityServer", "{837B55DC-D733-4A23-9DBB-77CF2CD24054}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -31,6 +35,10 @@ Global
 		{9AA45468-D0B9-43C4-8C1A-CEF1CEBD112A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AA45468-D0B9-43C4-8C1A-CEF1CEBD112A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AA45468-D0B9-43C4-8C1A-CEF1CEBD112A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C577493-D8E6-48E7-A9E0-915F24BC4453}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C577493-D8E6-48E7-A9E0-915F24BC4453}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C577493-D8E6-48E7-A9E0-915F24BC4453}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C577493-D8E6-48E7-A9E0-915F24BC4453}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,7 +46,9 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3989157F-40C8-42E8-8ABF-7CF6967D4D44} = {E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}
 		{0C8769A5-632A-452C-AB0C-5A15BFFCBD8B} = {2612BA6E-21AD-46A0-8BFA-EF00A6389BBD}
-		{9AA45468-D0B9-43C4-8C1A-CEF1CEBD112A} = {E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}
+		{9AA45468-D0B9-43C4-8C1A-CEF1CEBD112A} = {837B55DC-D733-4A23-9DBB-77CF2CD24054}
+		{4C577493-D8E6-48E7-A9E0-915F24BC4453} = {E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}
+		{837B55DC-D733-4A23-9DBB-77CF2CD24054} = {E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECEAB0F8-F5F6-4882-9A11-5022F78C87AB}

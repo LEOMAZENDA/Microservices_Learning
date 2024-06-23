@@ -45,18 +45,24 @@ public class CartRepository : ICartRepository
     public async Task<CartVO> SaveOrUpdateCart(CartVO vO)
     {
         Cart cart = _mapper.Map<Cart>(vO);
+
+        //Checks if the product is already saved in the database, inf doesn´t exist then save
         var product = await _context.Products.FirstOrDefaultAsync(
             p => p.Id == vO.CartDetails.FirstOrDefault().ProductId);
 
-        if (product == null) {
+        if (product == null)
+        {
             _context.Products.Add(cart.CartDetails.FirstOrDefault().Product);
             await _context.SaveChangesAsync();
         }
 
+        //Chech if CartHeader is null
         var cartHeader = await _context.CartHeaders.AsNoTracking().FirstOrDefaultAsync(
             c => c.UserId == cart.CartHeader.UserId);
 
-        if (cartHeader == null) {
+        if (cartHeader == null)
+        {
+            //Create cartHeader and Details
             _context.CartHeaders.Add(cart.CartHeader);
             await _context.SaveChangesAsync();
 
@@ -65,5 +71,32 @@ public class CartRepository : ICartRepository
             _context.CartDetails.Add(cart.CartDetails.FirstOrDefault());
             await _context.SaveChangesAsync();
         }
+        else
+        {
+            //If CartHeader isn´t null 
+            //Check if CartDetails has same Produxt
+            var carDetail = await _context.CartDetails.AsNoTracking().FirstOrDefaultAsync(
+                p => p.ProductId == vO.CartDetails.FirstOrDefault().ProductId &&
+                p.CartHeaderId == cartHeader.Id);
+            if (carDetail == null)
+            {
+                //Create CartDetails
+                cart.CartDetails.FirstOrDefault().CartHeaderId = cart.CartHeader.Id;
+                cart.CartDetails.FirstOrDefault().Product = null;
+                _context.CartDetails.Add(cart.CartDetails.FirstOrDefault());
+                await _context.SaveChangesAsync();
+            }
+            else
+            {
+                //Update product count and CartDetails
+                cart.CartDetails.FirstOrDefault().Product = null;
+                cart.CartDetails.FirstOrDefault().Count += carDetail.Count;
+                cart.CartDetails.FirstOrDefault().Id = carDetail.Id;
+                cart.CartDetails.FirstOrDefault().CartHeaderId = carDetail.CartHeaderId;
+                _context.CartDetails.Update(cart.CartDetails.FirstOrDefault());
+                await _context.SaveChangesAsync();
+            }
+        }
+        return _mapper.Map<CartVO>(cart);
     }
 }

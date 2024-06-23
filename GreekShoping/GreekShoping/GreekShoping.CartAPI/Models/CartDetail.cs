@@ -15,6 +15,6 @@ public class CartDetail :BaseEntity
     public Product Product { get; set; }
     public CartHeader CartHeader { get; set; }
 
-    [Column("count")]
-    public int count { get; set; }
+    [Column("Count")]
+    public int Count { get; set; }
 }

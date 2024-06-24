@@ -1,5 +1,5 @@
 ﻿using GreekShoping.Web.Models;
-using GreekShoping.Web.Services.IServices._ProductIServices;
+using GreekShoping.Web.Services._ProductServices;
 using GreekShoping.Web.Utils;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -34,7 +34,7 @@ namespace GreekShoping.Web.Controllers
 
         [Authorize(Role.Admin)]
         [HttpPost]
-        public async Task<IActionResult> ProductCreate(ProductModel model)
+        public async Task<IActionResult> ProductCreate(ProductViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -56,7 +56,7 @@ namespace GreekShoping.Web.Controllers
 
         [Authorize(Role.Admin)]
         [HttpPost]
-        public async Task<IActionResult> ProductUpdate(ProductModel model)
+        public async Task<IActionResult> ProductUpdate(ProductViewModel model)
         {
             if (ModelState.IsValid)
             {
@@ -80,7 +80,7 @@ namespace GreekShoping.Web.Controllers
 
         [HttpPost]
         [Authorize(Role.Admin)]
-        public async Task<IActionResult> ProductDelete(ProductModel model)
+        public async Task<IActionResult> ProductDelete(ProductViewModel model)
         {
             var token = await HttpContext.GetTokenAsync("access_token");
             var response = await _productService.DeleteProductById(model.Id, token);

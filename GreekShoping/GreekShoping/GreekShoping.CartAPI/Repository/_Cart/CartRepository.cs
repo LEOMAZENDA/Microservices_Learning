@@ -64,12 +64,12 @@ public class CartRepository : ICartRepository
             //If CartHeader isn´t null 
             //Check if CartDetails has same Produxt
             var carDetail = await _context.CartDetails.AsNoTracking().FirstOrDefaultAsync(
-                p => p.ProductId == vO.CartDetails.FirstOrDefault().ProductId &&
+                p => p.ProductId == cart.CartDetails.FirstOrDefault().ProductId &&
                 p.CartHeaderId == cartHeader.Id);
             if (carDetail == null)
             {
                 //Create CartDetails
-                cart.CartDetails.FirstOrDefault().CartHeaderId = cart.CartHeader.Id;
+                cart.CartDetails.FirstOrDefault().CartHeaderId = cartHeader.Id;
                 cart.CartDetails.FirstOrDefault().Product = null;
                 _context.CartDetails.Add(cart.CartDetails.FirstOrDefault());
                 await _context.SaveChangesAsync();

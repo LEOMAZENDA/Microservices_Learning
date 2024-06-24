@@ -40,9 +40,10 @@ public class CartController : Controller
         return View();
     }
 
-    [HttpDelete]
+
+    [HttpPost]
     [ActionName("RemoveCoupon")]
-    public async Task<IActionResult> RemoveCoupon()
+    public async Task<IActionResult> RemoveCoupon(CartViewModel model)
     {
         var token = await HttpContext.GetTokenAsync("access_token");
         var userId = User.Claims.Where(u => u.Type == "sub")?.FirstOrDefault()?.Value;

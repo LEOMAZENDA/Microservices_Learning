@@ -41,7 +41,7 @@ namespace GreekShoping.CartAPI.Migrations
 
                     b.HasIndex("ProductId");
 
-                    b.ToTable("TbCartDetail");
+                    b.ToTable("TbCartDetail", (string)null);
                 });
 
             modelBuilder.Entity("GreekShoping.CartAPI.Models.CartHeader", b =>
@@ -61,7 +61,7 @@ namespace GreekShoping.CartAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TbCartHeader");
+                    b.ToTable("TbCartHeader", (string)null);
                 });
 
             modelBuilder.Entity("GreekShoping.CartAPI.Models.Product", b =>
@@ -98,7 +98,7 @@ namespace GreekShoping.CartAPI.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TbProduct");
+                    b.ToTable("TbProduct", (string)null);
                 });
 
             modelBuilder.Entity("GreekShoping.CartAPI.Models.CartDetail", b =>

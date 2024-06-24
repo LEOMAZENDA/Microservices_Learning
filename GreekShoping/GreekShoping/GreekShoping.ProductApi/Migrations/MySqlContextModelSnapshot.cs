@@ -53,7 +53,7 @@ namespace GreekShoping.ProductApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("TbProduct");
+                    b.ToTable("TbProduct", (string)null);
 
                     b.HasData(
                         new

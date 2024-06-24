@@ -7,5 +7,5 @@ public class CartDetailViewModel
     public long ProductId { get; set; }
     public ProductViewModel Product { get; set; }
     public CartHeaderViewModel CartHeader { get; set; }
-    public int count { get; set; }
+    public int Count { get; set; }
 }

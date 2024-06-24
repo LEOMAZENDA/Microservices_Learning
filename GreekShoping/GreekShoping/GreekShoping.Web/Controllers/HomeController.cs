@@ -63,7 +63,7 @@ public class HomeController : Controller
 
         CartDetailViewModel cartDetail = new CartDetailViewModel()
         {
-            count = model.Count,
+            Count = model.Count,
             ProductId = model.Id,
             Product = await _productService.FindAllProductById(model.Id, token)
         };

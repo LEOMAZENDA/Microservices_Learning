@@ -64,4 +64,12 @@ public class CartController : ControllerBase
         if (!stattus) return NotFound();
         return Ok(stattus);
     }
+
+    [HttpPost("checkout")]
+    public async Task<ActionResult<CartVO>> Checkout()
+    {
+        var stattus = await _repository.RemoveCoupon(userId);
+        if (!stattus) return NotFound();
+        return Ok(stattus);
+    }
 }

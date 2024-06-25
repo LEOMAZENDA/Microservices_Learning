@@ -1,16 +1,15 @@
 ﻿using GreekShoping.Web.Models;
 using GreekShoping.Web.Utils;
 using System.Net.Http.Headers;
-using System.Reflection;
 
 namespace GreekShoping.Web.Services._CartServices;
 
-public class CartServices : ICartServices
+public class CartService : ICartService
 {
     private readonly HttpClient _client;
     public const string BasePath = "api/v1/cart";
 
-    public CartServices(HttpClient client)
+    public CartService(HttpClient client)
     {
         _client = client ?? throw new ArgumentNullException(nameof(client));
     }

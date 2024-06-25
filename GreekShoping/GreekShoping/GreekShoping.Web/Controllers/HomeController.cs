@@ -12,11 +12,11 @@ public class HomeController : Controller
 {
     private readonly ILogger<HomeController> _logger;
     private readonly IProductService _productService;
-    private readonly ICartServices _cartServices;
+    private readonly ICartService _cartServices;
 
     public HomeController(ILogger<HomeController> logger,
         IProductService productService,
-        ICartServices cartServices)
+        ICartService cartServices)
     {
         _logger = logger ?? throw new ArgumentNullException(nameof(logger));
         _productService = productService ?? throw new ArgumentNullException(nameof(productService));

@@ -1,4 +1,5 @@
 using GreekShoping.Web.Services._CartServices;
+using GreekShoping.Web.Services._CouponServices;
 using GreekShoping.Web.Services._ProductServices;
 using Microsoft.AspNetCore.Authentication;
 
@@ -8,13 +9,13 @@ builder.Services.AddHttpClient<IProductService, ProductService>(c =>
     c.BaseAddress = new Uri(builder.Configuration["ServicesUrls:ProductAPI"])
     );
 
-builder.Services.AddHttpClient<ICartServices, CartServices>(c =>
+builder.Services.AddHttpClient<ICartService, CartService>(c =>
     c.BaseAddress = new Uri(builder.Configuration["ServicesUrls:CartAPI"])
     );
 
-//builder.Services.AddHttpClient<ICouponService, CouponService>(c =>
-//    c.BaseAddress = new Uri(builder.Configuration["ServicesUrls:CouponAPI"])
-//    );
+builder.Services.AddHttpClient<ICouponService, CouponService>(c =>
+    c.BaseAddress = new Uri(builder.Configuration["ServicesUrls:CouponAPI"])
+    );
 
 builder.Services.AddAuthentication(options => {
     options.DefaultScheme = "Cookies";

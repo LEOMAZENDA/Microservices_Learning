@@ -2,7 +2,7 @@
 
 namespace GreekShoping.Web.Services._CartServices;
 
-public interface ICartServices
+public interface ICartService
 {
     Task<CartViewModel> FindCartByUserId(string userId, string token);
     Task<CartViewModel> AddItemToCart(CartViewModel cart, string token);

@@ -5,7 +5,7 @@ VisualStudioVersion = 17.10.34916.146
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "FrontEnd", "FrontEnd", "{2612BA6E-21AD-46A0-8BFA-EF00A6389BBD}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services_Apis", "Services_Apis", "{E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.ProductApi", "GreekShoping.ProductApi\GreekShoping.ProductApi.csproj", "{3989157F-40C8-42E8-8ABF-7CF6967D4D44}"
 EndProject
@@ -17,7 +17,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_SecurityByIdentitySecurity
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.IdentityServer", "GreekShoping.IdentityServer\GreekShoping.IdentityServer.csproj", "{FFBE2138-E7AB-4911-BC21-CEF14FE7A656}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreekShoping.CouponAPI", "GreekShoping.CouponAPI\GreekShoping.CouponAPI.csproj", "{E0F721E6-F8DB-40FA-A5AD-C041F1B70C93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.CouponAPI", "GreekShoping.CouponAPI\GreekShoping.CouponAPI.csproj", "{E0F721E6-F8DB-40FA-A5AD-C041F1B70C93}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

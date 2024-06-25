@@ -27,7 +27,7 @@ public class CartController : Controller
     [Authorize]
     public async Task<IActionResult> CartIndex()
     {
-        
+
         return View(await FindUserCart());
     }
 
@@ -74,6 +74,24 @@ public class CartController : Controller
     {
         return View(await FindUserCart());
     }
+
+    [HttpPost]
+    public async Task<IActionResult> Checkout(CartViewModel model)
+    {
+        var token = await HttpContext.GetTokenAsync("access_token");
+        var response = await _cartService.CheckOut(model.CartHeader, token);
+
+        if (response != null)
+            return RedirectToAction(nameof(Confirmmation));
+        return View(model);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Confirmmation()
+    {
+        return RedirectToAction();
+    }
+
 
     private async Task<CartViewModel> FindUserCart()
     {

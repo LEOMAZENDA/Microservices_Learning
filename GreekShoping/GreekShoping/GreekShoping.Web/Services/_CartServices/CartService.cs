@@ -1,6 +1,7 @@
 ﻿using GreekShoping.Web.Models;
 using GreekShoping.Web.Utils;
 using System.Net.Http.Headers;
+using System.Reflection;
 
 namespace GreekShoping.Web.Services._CartServices;
 
@@ -66,13 +67,17 @@ public class CartService : ICartService
         else throw new Exception("Something went wrong when calling API");
     }
 
-    public async Task<CartViewModel> CheckOut(CartHeaderViewModel cartHeader, string token)
+    public async Task<CartHeaderViewModel> CheckOut(CartHeaderViewModel model, string token)
     {
-        throw new NotImplementedException();
+        _client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+        var response = await _client.PostAsJson($"{BasePath}/checkout", model);
+        if (response.IsSuccessStatusCode)
+            return await response.ReadContentAs<CartHeaderViewModel>();
+        else throw new Exception("Something went wrong when calling API");
     }
 
     public async Task<bool> ClearCart(string iserId, string token)
     {
         throw new NotImplementedException();
-    }
+    }    
 }

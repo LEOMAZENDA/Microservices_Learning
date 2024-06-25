@@ -7,6 +7,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Views\Cart\Confirmmation.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.OpenIdConnect" Version="6.0.31" />
     <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
@@ -17,6 +21,18 @@
       <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
       <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
     </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Views\Cart\Confirmmation.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Views\Cart\Confirmmation.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Cart\Confirmmation.cshtml" />
   </ItemGroup>
 
 </Project>

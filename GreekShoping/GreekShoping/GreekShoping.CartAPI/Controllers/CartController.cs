@@ -1,4 +1,5 @@
 ﻿using GreekShoping.CartAPI.Data.ValueObjects;
+using GreekShoping.CartAPI.Message;
 using GreekShoping.CartAPI.Repository._Cart;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -66,10 +67,14 @@ public class CartController : ControllerBase
     }
 
     [HttpPost("checkout")]
-    public async Task<ActionResult<CartVO>> Checkout()
+    public async Task<ActionResult<CheckouHeaderVO>> Checkout(CheckouHeaderVO vO)
     {
-        var stattus = await _repository.RemoveCoupon(userId);
-        if (!stattus) return NotFound();
-        return Ok(stattus);
+        var cart = await _repository.FindCartByUserId(vO.UserId);
+        if (cart == null) return NotFound();
+        vO.CartDetails = cart.CartDetails;
+        vO.DateTime = DateTime.Now;
+        //TASK RabbititMQ Logic comes here!!!
+
+        return Ok(vO);
     }
 }

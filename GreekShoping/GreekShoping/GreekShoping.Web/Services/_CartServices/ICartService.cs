@@ -13,6 +13,6 @@ public interface ICartService
     Task<bool> ApplyCoupon(CartViewModel model, string token);
     Task<bool> RemoveCoupon(string userId, string token);
 
-    Task<CartViewModel> CheckOut(CartHeaderViewModel cartHeader, string token);
+    Task<CartHeaderViewModel> CheckOut(CartHeaderViewModel cartHeader, string token);
 
 }

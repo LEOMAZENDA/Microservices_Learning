@@ -44,7 +44,6 @@ public class CartController : Controller
         return View();
     }
 
-
     [HttpPost]
     [ActionName("RemoveCoupon")]
     public async Task<IActionResult> RemoveCoupon(CartViewModel model)
@@ -69,6 +68,12 @@ public class CartController : Controller
         return View();
     }
 
+    [Authorize]
+    [HttpGet]
+    public async Task<IActionResult> Checkout()
+    {
+        return View(await FindUserCart());
+    }
 
     private async Task<CartViewModel> FindUserCart()
     {
@@ -96,4 +101,5 @@ public class CartController : Controller
         }
         return response;
     }
+
 }

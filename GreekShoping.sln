@@ -19,6 +19,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.IdentityServer
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.CouponAPI", "GreekShoping.CouponAPI\GreekShoping.CouponAPI.csproj", "{E0F721E6-F8DB-40FA-A5AD-C041F1B70C93}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Integrations", "Integrations", "{D773D765-0660-456B-A3C5-F10E3BE9B295}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreekShoping.MessageBus", "GreekShoping.MessageBus\GreekShoping.MessageBus.csproj", "{D3C685BF-2994-416B-9E06-3020F39513EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +49,10 @@ Global
 		{E0F721E6-F8DB-40FA-A5AD-C041F1B70C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E0F721E6-F8DB-40FA-A5AD-C041F1B70C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E0F721E6-F8DB-40FA-A5AD-C041F1B70C93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3C685BF-2994-416B-9E06-3020F39513EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3C685BF-2994-416B-9E06-3020F39513EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3C685BF-2994-416B-9E06-3020F39513EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3C685BF-2994-416B-9E06-3020F39513EE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,6 +64,7 @@ Global
 		{B5617835-E084-4B6F-B24F-9C27D8B70E65} = {E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}
 		{FFBE2138-E7AB-4911-BC21-CEF14FE7A656} = {B5617835-E084-4B6F-B24F-9C27D8B70E65}
 		{E0F721E6-F8DB-40FA-A5AD-C041F1B70C93} = {E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}
+		{D3C685BF-2994-416B-9E06-3020F39513EE} = {D773D765-0660-456B-A3C5-F10E3BE9B295}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECEAB0F8-F5F6-4882-9A11-5022F78C87AB}

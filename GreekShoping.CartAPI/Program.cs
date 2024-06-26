@@ -1,6 +1,7 @@
 using AutoMapper;
 using GreekShoping.CartAPI.Config;
 using GreekShoping.CartAPI.Models.Context;
+using GreekShoping.CartAPI.RabbitMQCenter;
 using GreekShoping.CartAPI.Repository._Cart;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
@@ -20,6 +21,7 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthentication("Bearer")

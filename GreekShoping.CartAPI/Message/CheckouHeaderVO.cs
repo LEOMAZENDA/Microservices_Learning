@@ -1,10 +1,10 @@
 ﻿using GreekShoping.CartAPI.Data.ValueObjects;
+using GreekShoping.MessageBus.Services._MessageService;
 
 namespace GreekShoping.CartAPI.Message;
 
-public class CheckouHeaderVO
+public class CheckouHeaderVO : BaseMessage
 {
-    public long Id { get; set; }
     public string UserId { get; set; }
     public string CouponCode { get; set; }
     public decimal PurchaseAmount { get; set; }

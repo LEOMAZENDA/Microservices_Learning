@@ -1,5 +1,6 @@
 ﻿using GreekShoping.CartAPI.Data.ValueObjects;
 using GreekShoping.CartAPI.Message;
+using GreekShoping.CartAPI.RabbitMQCenter;
 using GreekShoping.CartAPI.Repository._Cart;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -11,12 +12,15 @@ namespace GreekShoping.CartAPI.Controllers;
 public class CartController : ControllerBase
 {
     private ICartRepository _repository;
-    public CartController(ICartRepository repository)
-    {
-        _repository = repository ?? throw new
-            ArgumentNullException(nameof(repository));
-    }
+    private IRabbitMQMessageSender _rabbitMQMessageSender;
 
+    public CartController(ICartRepository repository, IRabbitMQMessageSender rabbitMQMessageSender)
+    {
+        _repository = repository ?? 
+            throw new ArgumentNullException(nameof(repository));
+        _rabbitMQMessageSender = rabbitMQMessageSender ?? 
+            throw new ArgumentNullException(nameof(rabbitMQMessageSender));
+    }
 
     [HttpGet("find-cart/{id}")]
     public async Task<ActionResult<CartVO>> FindById(string id)
@@ -69,12 +73,14 @@ public class CartController : ControllerBase
     [HttpPost("checkout")]
     public async Task<ActionResult<CheckouHeaderVO>> Checkout(CheckouHeaderVO vO)
     {
+        if(vO?.UserId == null) return NotFound();
         var cart = await _repository.FindCartByUserId(vO.UserId);
         if (cart == null) return NotFound();
         vO.CartDetails = cart.CartDetails;
         vO.DateTime = DateTime.Now;
-        //TASK RabbititMQ Logic comes here!!!
 
+        //TASK RabbititMQ Logic comes here!!!
+        _rabbitMQMessageSender.SendeMessage(vO, "checkoutqueue22");
         return Ok(vO);
     }
 }

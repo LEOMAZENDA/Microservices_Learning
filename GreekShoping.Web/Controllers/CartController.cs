@@ -5,6 +5,7 @@ using GreekShoping.Web.Services._ProductServices;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Reflection;
 
 namespace GreekShoping.Web.Controllers;
 
@@ -81,15 +82,16 @@ public class CartController : Controller
         var token = await HttpContext.GetTokenAsync("access_token");
         var response = await _cartService.CheckOut(model.CartHeader, token);
 
-        if (response != null)
-            return RedirectToAction(nameof(Confirmmation));
+        if (response != null) { 
+            return RedirectToAction(nameof(Confirmation)); 
+        }
         return View(model);
     }
 
-    [HttpPost]
-    public async Task<IActionResult> Confirmmation()
+    [HttpGet]
+    public IActionResult Confirmation()
     {
-        return RedirectToAction();
+        return View();
     }
 
 

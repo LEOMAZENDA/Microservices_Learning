@@ -54,7 +54,7 @@ namespace GreekShoping.Web.Controllers
             return NotFound();
         }
 
-        [Authorize(Role.Admin)]
+        [Authorize/*(Role.Admin)*/]
         [HttpPost]
         public async Task<IActionResult> ProductUpdate(ProductViewModel model)
         {

@@ -73,14 +73,14 @@ public class CartController : ControllerBase
     [HttpPost("checkout")]
     public async Task<ActionResult<CheckouHeaderVO>> Checkout(CheckouHeaderVO vO)
     {
-        if(vO?.UserId == null) return NotFound();
+        if(vO?.UserId == null) return NotFound("Teste de não encontrado");
         var cart = await _repository.FindCartByUserId(vO.UserId);
         if (cart == null) return NotFound();
         vO.CartDetails = cart.CartDetails;
         vO.DateTime = DateTime.Now;
 
         //TASK RabbititMQ Logic comes here!!!
-        _rabbitMQMessageSender.SendeMessage(vO, "checkoutqueue22");
+        _rabbitMQMessageSender.SendeMessage(vO, "checkoutqueue");
         return Ok(vO);
     }
 }

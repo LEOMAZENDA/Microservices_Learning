@@ -42,10 +42,8 @@ public class DbInitializer : IDbInitializer
             FirstName = "Leonildo",
             LastName = "Admin"
         };
-        _user.CreateAsync(addmin, "AAaa123#")
-            .GetAwaiter().GetResult();// passando user admin criado e a senha default (AAaa123#)
-        _user.AddToRoleAsync(addmin, IdentityConfiguration.Admin)
-            .GetAwaiter().GetResult(); //Passando ao user admin a role admim
+        _user.CreateAsync(addmin, "AAaa123#").GetAwaiter().GetResult();// passando user admin criado e a senha default (AAaa123#)
+        _user.AddToRoleAsync(addmin, IdentityConfiguration.Admin).GetAwaiter().GetResult(); //Passando ao user admin a role admim
 
 
         var adminClaims = _user.AddClaimsAsync(addmin, new Claim[]
@@ -66,10 +64,8 @@ public class DbInitializer : IDbInitializer
             FirstName = "Leonildo",
             LastName = "Client"
         };
-        _user.CreateAsync(client, "AAaa123#")
-            .GetAwaiter().GetResult();// passando user client criado e a senha default (AAaa123#)
-        _user.AddToRoleAsync(client, IdentityConfiguration.Client)
-            .GetAwaiter().GetResult(); //Passando ao user client a role client
+        _user.CreateAsync(client, "AAaa123#").GetAwaiter().GetResult();// passando user client criado e a senha default (AAaa123#)
+        _user.AddToRoleAsync(client, IdentityConfiguration.Client).GetAwaiter().GetResult(); //Passando ao user client a role client
 
 
         var clientClaims = _user.AddClaimsAsync(client, new Claim[]

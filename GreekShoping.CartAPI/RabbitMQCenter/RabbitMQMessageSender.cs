@@ -14,16 +14,16 @@ public class RabbitMQMessageSender : IRabbitMQMessageSender
     private IConnection _connection;
 
     public RabbitMQMessageSender()
-    {
+    {//Here we have de access date of RabbiitMQ
         _hostName = "localhost";
         _userName = "guest";
         _password = "guest";
     }
 
-    public void SendeMessage(BaseMessage baseMessage, string queueName)
+    public void SendeMessage(BaseMessage message, string queueName)
     {
         var fecttory = new ConnectionFactory
-        {
+        { 
             HostName = _hostName,
             UserName = _userName,
             Password = _password
@@ -32,9 +32,8 @@ public class RabbitMQMessageSender : IRabbitMQMessageSender
 
         using var channel = _connection.CreateModel();
         channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
-        byte[] body = GetMessageAsBytArray(baseMessage);
-        channel.BasicPublish(
-            exchange: string.Empty, routingKey: queueName, basicProperties: null, body: body);
+        byte[] body = GetMessageAsBytArray(message);
+        channel.BasicPublish(exchange: string.Empty, routingKey: queueName, basicProperties: null, body: body);
     }
 
     private byte[] GetMessageAsBytArray(BaseMessage message)

@@ -3,6 +3,7 @@ using GreekShoping.CartAPI.Config;
 using GreekShoping.CartAPI.Models.Context;
 using GreekShoping.CartAPI.RabbitMQCenter;
 using GreekShoping.CartAPI.Repository._Cart;
+using GreekShoping.CartAPI.Repository._Coupon;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -21,9 +22,15 @@ builder.Services.AddSingleton(mapper);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 builder.Services.AddScoped<ICartRepository, CartRepository>();
+builder.Services.AddScoped<ICouponRepository, CouponRepository>();
+
 builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
 
 builder.Services.AddControllers();
+
+//builder.Services.AddHttpClient<ICouponRepository, CouponRepository>(s => s.BaseAddress = new Uri(
+//    builder.Configuration["ServicesUrls:CouponAPI"]));
+
 builder.Services.AddAuthentication("Bearer")
     .AddJwtBearer("Bearer", options =>
     {

@@ -23,8 +23,9 @@ namespace GreekShoping.CouponAPI.Controllers
         [Authorize]
         public async Task<ActionResult<CouponVO>> GetCouponByCouponCode(string couponCode)
         {
+            //var token = await HttpContext.GetTokenAsync("access_token");
             var coupon = await _repository.GetCouponByCouponCode(couponCode);
-            if (coupon.Id <= 0) return NotFound();
+            if (coupon != null) return NotFound();
             return Ok(coupon);
         }
     }

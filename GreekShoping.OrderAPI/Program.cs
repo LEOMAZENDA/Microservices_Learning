@@ -1,4 +1,5 @@
 using GreekShoping.OrderAPI.Models.Context;
+using GreekShoping.OrderAPI.Repository._OrderRepository;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
@@ -11,9 +12,16 @@ var conecction = builder.Configuration["MySqlConnection:MySqlConnectionString"];
 builder.Services.AddDbContext<MySqlContext>(options => options.UseMySql(
               conecction, new MySqlServerVersion(new Version(8, 4, 0))));
 
-//Injectando dependencias do AutoMapper
+var dbContextBuilder = new DbContextOptionsBuilder<MySqlContext>();
+dbContextBuilder.UseMySql(conecction,
+    new MySqlServerVersion(new Version(8, 0, 29))
+);
 
-//builder.Services.AddScoped<ICartRepository, CartRepository>();
+//Injectando dependencias 
+
+builder.Services.AddSingleton(new OrderRepository(dbContextBuilder.Options));
+
+//builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthentication("Bearer")

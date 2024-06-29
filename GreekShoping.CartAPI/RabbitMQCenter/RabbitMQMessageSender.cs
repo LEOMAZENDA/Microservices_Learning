@@ -22,27 +22,51 @@ public class RabbitMQMessageSender : IRabbitMQMessageSender
 
     public void SendeMessage(BaseMessage message, string queueName)
     {
-        var fecttory = new ConnectionFactory
-        { 
-            HostName = _hostName,
-            UserName = _userName,
-            Password = _password
-        };
-       _connection = fecttory.CreateConnection();
+       if(ConnectionExists())
+        {
+            using var channel = _connection.CreateModel();
+            channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
+            byte[] body = GetMessageAsBytArray(message);
+            channel.BasicPublish(exchange: string.Empty, routingKey: queueName, basicProperties: null, body: body);
+        }
 
-        using var channel = _connection.CreateModel();
-        channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
-        byte[] body = GetMessageAsBytArray(message);
-        channel.BasicPublish(exchange: string.Empty, routingKey: queueName, basicProperties: null, body: body);
     }
 
     private byte[] GetMessageAsBytArray(BaseMessage message)
     {
-        var opts = new JsonSerializerOptions {
+        var opts = new JsonSerializerOptions
+        {
             WriteIndented = true,
         };
         var json = JsonSerializer.Serialize<CheckouHeaderVO>((CheckouHeaderVO)message, opts);
         var body = Encoding.UTF8.GetBytes(json);
         return body;
+    }
+
+    private void CreateConnection()
+    {
+        try
+        {
+            var fecttory = new ConnectionFactory
+            {
+                HostName = _hostName,
+                UserName = _userName,
+                Password = _password
+            };
+            _connection = fecttory.CreateConnection();
+        }
+        catch (Exception)
+        {
+            //Log Exception
+            throw;
+        }
+        throw new NotImplementedException();
+    }
+
+    private bool ConnectionExists()
+    {
+        if (_connection != null) return true;
+        CreateConnection();
+        return _connection != null;
     }
 }

@@ -1,5 +1,6 @@
 ﻿
 using GreekShoping.OrderAPI.Messeges;
+using GreekShoping.OrderAPI.Models;
 using GreekShoping.OrderAPI.Repository._OrderRepository;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -46,6 +47,34 @@ public class RabbitMQMessageConsumer : BackgroundService
 
     private async Task ProcessOder(CheckoutHeaderVO vO)
     {
-        throw new NotImplementedException();
+        OrderHeader order = new ()
+        {
+            UserId = vO.UserId,
+            FirstName = vO.FirstName,
+            LastName = vO.LastName,
+            OrderDetails = new List<OrderDetail>(),
+            CardNumber = vO.CardNumber,
+            CouponCode = vO.CouponCode,
+            CVV = vO.CVV,
+            DiscountAmount = vO.DiscountAmount,
+            Email = vO.Email,
+            ExpiryMonthYear = vO.ExpiryMothYear,
+            Phone = vO.Phone,
+            PaymentStatus = false,
+            OrderTime = DateTime.Now
+        };
+
+        foreach (var details in vO.CartDetails)
+        {
+            OrderDetail model = new() {
+                ProductId = details.ProductId,
+                ProductName = details.Product.Name,
+                Price = details.Product.Price,
+                Count = details.count,
+            };
+            order.CartTotalItens += details.count;
+            order.OrderDetails.Add(model);
+        }
+        await _repository.AddOrder(order);
     }
 }

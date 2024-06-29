@@ -9,13 +9,13 @@ using System.Text.Json;
 
 namespace GreekShoping.OrderAPI.MessegeConsumer;
 
-public class RabbitMQMessageConsumer : BackgroundService
+public class RabbitMQCheckoutConsumer : BackgroundService
 {
     private readonly OrderRepository _repository;
     private IConnection _connection;
     private IModel _channel;
 
-    public RabbitMQMessageConsumer(OrderRepository repository)
+    public RabbitMQCheckoutConsumer(OrderRepository repository)
     {
         _repository = repository;
         var fecttory = new ConnectionFactory

@@ -1,3 +1,4 @@
+using GreekShoping.OrderAPI.MessegeConsumer;
 using GreekShoping.OrderAPI.Models.Context;
 using GreekShoping.OrderAPI.Repository._OrderRepository;
 using Microsoft.EntityFrameworkCore;
@@ -18,10 +19,8 @@ dbContextBuilder.UseMySql(conecction,
 );
 
 //Injectando dependencias 
-
 builder.Services.AddSingleton(new OrderRepository(dbContextBuilder.Options));
-
-//builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
+builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthentication("Bearer")

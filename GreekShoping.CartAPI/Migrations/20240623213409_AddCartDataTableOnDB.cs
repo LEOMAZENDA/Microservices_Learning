@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-namespace GreekShoping.CartAPI.Migrations
+namespace GreekShoping.OrderAPI.Migrations
 {
     public partial class AddCartDataTableOnDB : Migration
     {

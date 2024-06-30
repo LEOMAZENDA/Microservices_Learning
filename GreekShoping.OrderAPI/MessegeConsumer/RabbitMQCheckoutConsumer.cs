@@ -7,7 +7,7 @@ using RabbitMQ.Client.Events;
 using System.Text;
 using System.Text.Json;
 
-namespace GreekShoping.CartAPI.MessegeConsumer
+namespace GreekShoping.OrderAPI.MessegeConsumer
 {
     public class RabbitMQCheckoutConsumer : BackgroundService
     {
@@ -41,14 +41,14 @@ namespace GreekShoping.CartAPI.MessegeConsumer
             {
                 var content = Encoding.UTF8.GetString(evt.Body.ToArray());
                 CheckoutHeaderVO vO = JsonSerializer.Deserialize<CheckoutHeaderVO>(content);
-                ProcessOder(vO).GetAwaiter().GetResult();
+                ProcessOrder(vO).GetAwaiter().GetResult();
                 _channel.BasicAck(evt.DeliveryTag, false);
             };
             _channel.BasicConsume("checkoutqueue", false, consumer);
             return Task.CompletedTask;
         }
 
-        private async Task ProcessOder(CheckoutHeaderVO vO)
+        private async Task ProcessOrder(CheckoutHeaderVO vO)
         {
             OrderHeader order = new()
             {

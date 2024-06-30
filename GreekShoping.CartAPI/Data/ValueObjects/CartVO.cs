@@ -1,4 +1,4 @@
-﻿namespace GreekShoping.CartAPI.Data.ValueObjects;
+﻿namespace GreekShoping.OrderAPI.Data.ValueObjects;
 
 public class CartVO
 {

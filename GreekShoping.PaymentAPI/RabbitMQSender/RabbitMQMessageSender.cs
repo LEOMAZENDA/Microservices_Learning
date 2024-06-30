@@ -1,10 +1,10 @@
-﻿using GreekShoping.OrderAPI.Message;
-using GreekShoping.MessageBus;
+﻿using GreekShoping.MessageBus;
+using GreekShoping.PaymentAPI.Messege;
 using RabbitMQ.Client;
 using System.Text;
 using System.Text.Json;
 
-namespace GreekShoping.OrderAPI.RabbitMQSender;
+namespace GreekShoping.PaymentAPI.RabbitMQSender;
 
 public class RabbitMQMessageSender : IRabbitMQMessageSender
 {
@@ -37,7 +37,7 @@ public class RabbitMQMessageSender : IRabbitMQMessageSender
         {
             WriteIndented = true,
         };
-        var json = JsonSerializer.Serialize<CheckouHeaderVO>((CheckouHeaderVO)message, opts);
+        var json = JsonSerializer.Serialize<UpdatePaymentResultMessege>((UpdatePaymentResultMessege)message, opts);
         var body = Encoding.UTF8.GetBytes(json);
         return body;
     }

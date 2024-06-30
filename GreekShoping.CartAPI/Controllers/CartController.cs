@@ -1,13 +1,13 @@
-﻿using GreekShoping.CartAPI.Data.ValueObjects;
-using GreekShoping.CartAPI.Message;
-using GreekShoping.CartAPI.RabbitMQSender;
-using GreekShoping.CartAPI.Repository._Cart;
-using GreekShoping.CartAPI.Repository._Coupon;
+﻿using GreekShoping.OrderAPI.Data.ValueObjects;
+using GreekShoping.OrderAPI.Message;
+using GreekShoping.OrderAPI.RabbitMQSender;
+using GreekShoping.OrderAPI.Repository._Cart;
+using GreekShoping.OrderAPI.Repository._Coupon;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
-namespace GreekShoping.CartAPI.Controllers;
+namespace GreekShoping.OrderAPI.Controllers;
 
 [Route("api/v1/[controller]")]
 [ApiController]
@@ -98,6 +98,8 @@ public class CartController : ControllerBase
 
         //TASK RabbititMQ Logic comes here!!!
         _rabbitMQMessageSender.SendeMessage(vO, "checkoutqueue");
+
+        await _cartRepository.ClearCart(vO.UserId);
         return Ok(vO);
     }
 }

@@ -1,29 +1,14 @@
-using GreekShoping.OrderAPI.MessegeConsumer;
-using GreekShoping.OrderAPI.Context;
-using GreekShoping.OrderAPI.RabbitMQSender;
-using GreekShoping.OrderAPI.Repository;
-using Microsoft.EntityFrameworkCore;
+using GreekShoping.PaymentAPI.MessegeConsumer;
+using GreekShoping.PaymentAPI.RabbitMQSender;
+using GreekShoping_PaymentProcessor;
 using Microsoft.IdentityModel.Tokens;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
 // Add services to the container.
-var conecction = builder.Configuration["MySqlConnection:MySqlConnectionString"];
-
-builder.Services.AddDbContext<MySqlContext>(options => options.UseMySql(
-              conecction, new MySqlServerVersion(new Version(8, 4, 0))));
-
-var dbContextBuilder = new DbContextOptionsBuilder<MySqlContext>();
-dbContextBuilder.UseMySql(conecction,
-    new MySqlServerVersion(new Version(8, 4, 0))
-);
-
-//Injectando dependencias 
-builder.Services.AddSingleton(new OrderRepository(dbContextBuilder.Options));
-builder.Services.AddHostedService<RabbitMQCheckoutConsumer>();
-builder.Services.AddHostedService<RabbitMQPaymenttConsumer>();
+builder.Services.AddSingleton<IProcessPayment, ProcessPayment>();
 builder.Services.AddSingleton<IRabbitMQMessageSender, RabbitMQMessageSender>();
+builder.Services.AddHostedService<RabbitMQPaymentConsumer >();
 
 builder.Services.AddControllers();
 builder.Services.AddAuthentication("Bearer")
@@ -45,7 +30,6 @@ builder.Services.AddAuthorization(options =>
     });
 });
 
-builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

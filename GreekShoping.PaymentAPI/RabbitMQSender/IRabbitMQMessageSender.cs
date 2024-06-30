@@ -1,6 +1,6 @@
 ﻿using GreekShoping.MessageBus;
 
-namespace GreekShoping.OrderAPI.RabbitMQSender;
+namespace GreekShoping.PaymentAPI.RabbitMQSender;
 
 public interface IRabbitMQMessageSender
 {

@@ -1,4 +1,4 @@
-﻿namespace GreekShoping.CartAPI.Models;
+﻿namespace GreekShoping.OrderAPI.Models;
 
 public class Cart
 {

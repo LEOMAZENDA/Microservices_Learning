@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
-using GreekShoping.CartAPI.Data.ValueObjects;
-using GreekShoping.CartAPI.Models;
+using GreekShoping.OrderAPI.Data.ValueObjects;
+using GreekShoping.OrderAPI.Models;
 
-namespace GreekShoping.CartAPI.Config;
+namespace GreekShoping.OrderAPI.Config;
 
 public class MappingConfig
 {

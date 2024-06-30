@@ -1,7 +1,7 @@
-﻿using GreekShoping.CartAPI.Models;
+﻿using GreekShoping.OrderAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GreekShoping.CartAPI.Context;
+namespace GreekShoping.OrderAPI.Context;
 
 public class MySqlContext : DbContext
 {

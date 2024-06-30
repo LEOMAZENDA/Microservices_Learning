@@ -1,7 +1,7 @@
-﻿using GreekShoping.CartAPI.Data.ValueObjects;
+﻿using GreekShoping.OrderAPI.Data.ValueObjects;
 using GreekShoping.MessageBus;
 
-namespace GreekShoping.CartAPI.Message;
+namespace GreekShoping.OrderAPI.Message;
 
 public class CheckouHeaderVO : BaseMessage
 {

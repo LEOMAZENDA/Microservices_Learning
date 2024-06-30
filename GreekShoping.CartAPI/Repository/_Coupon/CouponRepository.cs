@@ -1,9 +1,9 @@
-﻿using GreekShoping.CartAPI.Data.ValueObjects;
+﻿using GreekShoping.OrderAPI.Data.ValueObjects;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
-namespace GreekShoping.CartAPI.Repository._Coupon;
+namespace GreekShoping.OrderAPI.Repository._Coupon;
 
 public class CouponRepository : ICouponRepository
 {

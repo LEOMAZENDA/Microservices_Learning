@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
-using GreekShoping.CartAPI.Context;
-using GreekShoping.CartAPI.Data.ValueObjects;
-using GreekShoping.CartAPI.Models;
+using GreekShoping.OrderAPI.Context;
+using GreekShoping.OrderAPI.Data.ValueObjects;
+using GreekShoping.OrderAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GreekShoping.CartAPI.Repository._Cart;
+namespace GreekShoping.OrderAPI.Repository._Cart;
 
 public class CartRepository : ICartRepository
 {
@@ -21,7 +21,7 @@ public class CartRepository : ICartRepository
         Cart cart = new ()
         {
             CartHeader = await _context.CartHeaders
-            .FirstOrDefaultAsync(x => x.UserId == userId),
+            .FirstOrDefaultAsync(x => x.UserId == userId) ?? new CartHeader(),
         };
         cart.CartDetails = _context.CartDetails
             .Where(c => c.CartHeaderId == cart.CartHeader.Id)
@@ -154,5 +154,4 @@ public class CartRepository : ICartRepository
         }
         return false;
     }
-
 }

@@ -1,6 +1,6 @@
-﻿using GreekShoping.CartAPI.Data.ValueObjects;
+﻿using GreekShoping.OrderAPI.Data.ValueObjects;
 
-namespace GreekShoping.CartAPI.Repository._Cart;
+namespace GreekShoping.OrderAPI.Repository._Cart;
 
 public interface ICartRepository
 {

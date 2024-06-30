@@ -1,7 +1,7 @@
-﻿using GreekShoping.CartAPI.Models.Base;
+﻿using GreekShoping.OrderAPI.Models.Base;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace GreekShoping.CartAPI.Models;
+namespace GreekShoping.OrderAPI.Models;
 
 [Table("TbCartDetail")]
 public class CartDetail :BaseEntity

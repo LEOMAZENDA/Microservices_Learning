@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
-using GreekShoping.CartAPI.Models.Base;
+using GreekShoping.OrderAPI.Models.Base;
 
-namespace GreekShoping.CartAPI.Models;
+namespace GreekShoping.OrderAPI.Models;
 
 [Table("TbProduct")]
 public class Product 

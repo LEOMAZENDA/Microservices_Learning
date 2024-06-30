@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 
-namespace GreekShoping.CartAPI.Models.Base;
+namespace GreekShoping.OrderAPI.Models.Base;
 
 public class BaseEntity
 {

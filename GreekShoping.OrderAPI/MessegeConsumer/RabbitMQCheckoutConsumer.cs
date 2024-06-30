@@ -1,5 +1,6 @@
 ﻿using GreekShoping.OrderAPI.Messege;
 using GreekShoping.OrderAPI.Models;
+using GreekShoping.OrderAPI.RabbitMQSender;
 using GreekShoping.OrderAPI.Repository;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
@@ -13,11 +14,13 @@ namespace GreekShoping.CartAPI.MessegeConsumer
         private readonly OrderRepository _repository;
         private IConnection _connection;
         private IModel _channel;
-        //private IRabbitMQMessageSender _rabbitMQMessageSender;
+        private IRabbitMQMessageSender _rabbitMQMessageSender;
 
-        public RabbitMQCheckoutConsumer(OrderRepository repository)
+        public RabbitMQCheckoutConsumer(OrderRepository repository,
+            IRabbitMQMessageSender rabbitMQMessageSender)
         {
             _repository = repository;
+            _rabbitMQMessageSender = rabbitMQMessageSender;
             var fecttory = new ConnectionFactory
             {
                 HostName = "localhost",
@@ -79,6 +82,27 @@ namespace GreekShoping.CartAPI.MessegeConsumer
                 order.OrderDetails.Add(detail);
             }
             await _repository.AddOrder(order);
+
+            PaymentVO payment = new ()
+            {
+                Name = order.FirstName +" "+ order.LastName,
+                CardNumber = order.CardNumber,
+                CVV = order.CVV,
+                ExpiryMonthYear = order.ExpiryMonthYear,
+                OrderId = order.Id,
+                PurchaseAmount= order.PurchaseAmount,
+                Email = order.Email,
+            };
+
+            try
+            {
+                _rabbitMQMessageSender.SendeMessage(payment, "orderpaymentprocessqueue");
+            }
+            catch (Exception)
+            {
+                //Log
+                throw;
+            }
         }
     }
 }

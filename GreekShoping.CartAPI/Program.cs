@@ -1,7 +1,7 @@
 using AutoMapper;
 using GreekShoping.CartAPI.Config;
 using GreekShoping.CartAPI.Context;
-using GreekShoping.CartAPI.RabbitMQSenter;
+using GreekShoping.CartAPI.RabbitMQSender;
 using GreekShoping.CartAPI.Repository._Cart;
 using GreekShoping.CartAPI.Repository._Coupon;
 using Microsoft.EntityFrameworkCore;

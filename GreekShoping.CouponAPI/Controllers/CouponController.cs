@@ -1,7 +1,6 @@
 ﻿using GreekShoping.CouponAPI.Data.ValueObjects;
 using GreekShoping.CouponAPI.Repository._Coupon;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GreekShoping.CouponAPI.Controllers

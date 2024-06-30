@@ -1,5 +1,5 @@
 ﻿using GreekShoping.CartAPI.Data.ValueObjects;
-using GreekShoping.MessageBus.Services._MessageService;
+using GreekShoping.MessageBus;
 
 namespace GreekShoping.CartAPI.Message;
 

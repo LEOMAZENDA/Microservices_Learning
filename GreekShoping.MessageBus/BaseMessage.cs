@@ -1,4 +1,4 @@
-﻿namespace GreekShoping.MessageBus.Services._MessageService;
+﻿namespace GreekShoping.MessageBus;
 
 public class BaseMessage
 {

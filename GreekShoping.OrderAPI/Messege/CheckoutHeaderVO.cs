@@ -1,8 +1,6 @@
-﻿using GreekShoping.MessageBus.Services._MessageService;
+﻿namespace GreekShoping.OrderAPI.Messege;
 
-namespace GreekShoping.OrderAPI.Messeges;
-
-public class CheckoutHeaderVO : BaseMessage
+public class CheckoutHeaderVO
 {
     public string UserId { get; set; }
     public string CouponCode { get; set; }

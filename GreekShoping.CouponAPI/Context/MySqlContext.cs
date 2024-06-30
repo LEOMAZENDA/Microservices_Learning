@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GreekShoping.CouponAPI.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace GreekShoping.CouponAPI.Models.Context;
+namespace GreekShoping.CouponAPI.Context;
 
 public class MySqlContext : DbContext
 {

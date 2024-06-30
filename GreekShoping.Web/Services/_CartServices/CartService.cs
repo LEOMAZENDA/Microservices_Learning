@@ -1,6 +1,7 @@
 ﻿using GreekShoping.Web.Models;
 using GreekShoping.Web.Utils;
 using System.Net.Http.Headers;
+using System.Reflection;
 
 namespace GreekShoping.Web.Services._CartServices;
 
@@ -74,11 +75,10 @@ public class CartService : ICartService
         {
             return await response.ReadContentAs<CartHeaderViewModel>();
         }
-        else if (response.StatusCode.ToString().Equals("PrecondicionFailed"))
+        else if(response.StatusCode.ToString().Equals("PreconditionFailed"))
         {
-            return "Coupon Price has changed. Please Confirm!";
+            return "Coupon price has changed. Pleasse Confirm!";
         }
-
         else throw new Exception("Something went wrong when calling API");
     }
 

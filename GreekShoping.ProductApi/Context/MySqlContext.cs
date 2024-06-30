@@ -1,6 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using GreekShoping.ProductApi.Models;
+using Microsoft.EntityFrameworkCore;
 
-namespace GreekShoping.ProductApi.Models.Context;
+namespace GreekShoping.ProductApi.Context;
 
 public class MySqlContext : DbContext
 {
@@ -65,6 +66,16 @@ public class MySqlContext : DbContext
             Price = new decimal(7500.90),
             CategoryName = "Roupa",
             ImageUrl = "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/13_dragon_ball.jpg?raw=true",
+        });
+
+        modelBuilder.Entity<Product>().HasData(new Product
+        {
+            Id = 10,
+            Name = "Camisola - Super Mário 2000",
+            Description = "Camisola de homem para Jovens e Adultos ",
+            Price = new decimal(7500.90),
+            CategoryName = "Roupa",
+            ImageUrl = "~/prodsimages/1_super_mario.jpg",
         });
 
         base.OnModelCreating(modelBuilder);

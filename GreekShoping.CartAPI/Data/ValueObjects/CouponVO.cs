@@ -1,5 +1,4 @@
 ﻿namespace GreekShoping.CartAPI.Data.ValueObjects;
-
 public class CouponVO
 {
     public long Id { get; set; }

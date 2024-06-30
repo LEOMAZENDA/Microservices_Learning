@@ -7,5 +7,5 @@ public class BaseEntity
 {
     [Key]
     [Column("id")]
-    public long Id {get; set;}
+    public long Id { get; set; }
 }

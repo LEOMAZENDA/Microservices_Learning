@@ -1,6 +1,6 @@
 ﻿using GreekShoping.IdentityServer.Configuration;
+using GreekShoping.IdentityServer.Context;
 using GreekShoping.IdentityServer.Model;
-using GreekShoping.IdentityServer.Model.Context;
 using IdentityModel;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;

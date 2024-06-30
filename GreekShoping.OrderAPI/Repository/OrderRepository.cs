@@ -1,8 +1,8 @@
-﻿using GreekShoping.OrderAPI.Models;
-using GreekShoping.OrderAPI.Models.Context;
+﻿using GreekShoping.OrderAPI.Context;
+using GreekShoping.OrderAPI.Models;
 using Microsoft.EntityFrameworkCore;
 
-namespace GreekShoping.OrderAPI.Repository._OrderRepository;
+namespace GreekShoping.OrderAPI.Repository;
 
 public class OrderRepository : IOrderRepository
 {
@@ -15,9 +15,9 @@ public class OrderRepository : IOrderRepository
 
     public async Task<bool> AddOrder(OrderHeader header)
     {
-        if(header == null)  return false;
+        if (header == null) return false;
         await using var _db = new MySqlContext(_context);
-        _db.OrderHeader.Add(header);
+        _db.Headers.Add(header);
         await _db.SaveChangesAsync();
         return true;
     }
@@ -25,12 +25,11 @@ public class OrderRepository : IOrderRepository
     public async Task UpdateOderPaymentStatus(long orderHeaderId, bool status)
     {
         await using var _db = new MySqlContext(_context);
-        var header = await _db.OrderHeader.FirstOrDefaultAsync(o => o.Id == orderHeaderId);
-        if(header != null){
+        var header = await _db.Headers.FirstOrDefaultAsync(o => o.Id == orderHeaderId);
+        if (header != null)
+        {
             header.PaymentStatus = status;
             await _db.SaveChangesAsync();
-        }   
+        }
     }
-
-
 }

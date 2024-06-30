@@ -1,4 +1,4 @@
-﻿namespace GreekShoping.OrderAPI.Messeges;
+﻿namespace GreekShoping.OrderAPI.Messege;
 
 public class CartDetailVO
 {
@@ -7,4 +7,5 @@ public class CartDetailVO
     public long ProductId { get; set; }
     public virtual ProductVO Product { get; set; }
     public int count { get; set; }
+
 }

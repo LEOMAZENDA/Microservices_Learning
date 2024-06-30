@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using GreekShoping.CouponAPI.Context;
 using GreekShoping.CouponAPI.Data.ValueObjects;
-using GreekShoping.CouponAPI.Models.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace GreekShoping.CouponAPI.Repository._Coupon;

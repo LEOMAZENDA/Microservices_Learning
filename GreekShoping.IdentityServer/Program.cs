@@ -1,9 +1,9 @@
 using Duende.IdentityServer.Services;
 using GeekShoping.IdentityServer.Services;
 using GreekShoping.IdentityServer.Configuration;
+using GreekShoping.IdentityServer.Context;
 using GreekShoping.IdentityServer.Inicializer;
 using GreekShoping.IdentityServer.Model;
-using GreekShoping.IdentityServer.Model.Context;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

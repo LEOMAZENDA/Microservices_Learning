@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using GreekShoping.CartAPI.Context;
 using GreekShoping.CartAPI.Data.ValueObjects;
 using GreekShoping.CartAPI.Models;
-using GreekShoping.CartAPI.Models.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace GreekShoping.CartAPI.Repository._Cart;

@@ -1,6 +1,6 @@
-﻿namespace GreekShoping.OrderAPI.Messeges;
+﻿namespace GreekShoping.OrderAPI.Messege;
 
-public class ProductVO 
+public class ProductVO
 {
     public long Id { get; set; }
     public string Name { get; set; }

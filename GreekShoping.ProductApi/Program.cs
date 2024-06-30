@@ -1,9 +1,8 @@
 using AutoMapper;
 using GreekShoping.ProductApi.Config;
-using GreekShoping.ProductApi.Models.Context;
+using GreekShoping.ProductApi.Context;
 using GreekShoping.ProductApi.Repository._Product;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 

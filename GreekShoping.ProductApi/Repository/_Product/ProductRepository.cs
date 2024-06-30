@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
+using GreekShoping.ProductApi.Context;
 using GreekShoping.ProductApi.Data.ValueObjects;
 using GreekShoping.ProductApi.Models;
-using GreekShoping.ProductApi.Models.Context;
 using Microsoft.EntityFrameworkCore;
 
 namespace GreekShoping.ProductApi.Repository._Product;

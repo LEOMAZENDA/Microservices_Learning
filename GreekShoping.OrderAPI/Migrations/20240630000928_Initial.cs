@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GreekShoping.OrderAPI.Migrations
 {
-    public partial class OrderDataTAbelOnDB : Migration
+    public partial class Initial : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -21,7 +21,7 @@ namespace GreekShoping.OrderAPI.Migrations
                         .Annotation("MySql:ValueGenerationStrategy", MySqlValueGenerationStrategy.IdentityColumn),
                     User_id = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
-                    coupon_code = table.Column<string>(type: "longtext", nullable: true)
+                    Coupon_code = table.Column<string>(type: "longtext", nullable: true)
                         .Annotation("MySql:CharSet", "utf8mb4"),
                     Purchase_amount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
                     Discount_amount = table.Column<decimal>(type: "decimal(65,30)", nullable: false),
@@ -51,7 +51,7 @@ namespace GreekShoping.OrderAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateTable(
-                name: "TbOrderDetail",
+                name: "Details",
                 columns: table => new
                 {
                     id = table.Column<long>(type: "bigint", nullable: false)
@@ -65,9 +65,9 @@ namespace GreekShoping.OrderAPI.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TbOrderDetail", x => x.id);
+                    table.PrimaryKey("PK_Details", x => x.id);
                     table.ForeignKey(
-                        name: "FK_TbOrderDetail_TbOrderHeader_OrderHeaderId",
+                        name: "FK_Details_TbOrderHeader_OrderHeaderId",
                         column: x => x.OrderHeaderId,
                         principalTable: "TbOrderHeader",
                         principalColumn: "id",
@@ -76,15 +76,15 @@ namespace GreekShoping.OrderAPI.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_TbOrderDetail_OrderHeaderId",
-                table: "TbOrderDetail",
+                name: "IX_Details_OrderHeaderId",
+                table: "Details",
                 column: "OrderHeaderId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-                name: "TbOrderDetail");
+                name: "Details");
 
             migrationBuilder.DropTable(
                 name: "TbOrderHeader");

@@ -1,16 +1,15 @@
-﻿using GreekShoping.OrderAPI.Models;
-using GreekShoping.OrderAPI.Models.Base;
+﻿using GreekShoping.OrderAPI.Models.Base;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace GreekShoping.OrderAPI.Models;
 
 [Table("TbOrderHeader")]
-public class OrderHeader: BaseEntity
+public class OrderHeader : BaseEntity
 {
     [Column("User_id")]
     public string UserId { get; set; }
 
-    [Column("coupon_code")]
+    [Column("Coupon_code")]
     public string CouponCode { get; set; }
 
     [Column("Purchase_amount")]

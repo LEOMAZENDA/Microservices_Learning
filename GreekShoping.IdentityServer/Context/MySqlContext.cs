@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using GreekShoping.IdentityServer.Model;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace GreekShoping.IdentityServer.Model.Context;
+namespace GreekShoping.IdentityServer.Context;
 
 public class MySqlContext : IdentityDbContext<ApplicationUser>
 {

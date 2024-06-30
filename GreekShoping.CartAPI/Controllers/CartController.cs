@@ -1,6 +1,6 @@
 ﻿using GreekShoping.CartAPI.Data.ValueObjects;
 using GreekShoping.CartAPI.Message;
-using GreekShoping.CartAPI.RabbitMQCenter;
+using GreekShoping.CartAPI.RabbitMQSenter;
 using GreekShoping.CartAPI.Repository._Cart;
 using GreekShoping.CartAPI.Repository._Coupon;
 using Microsoft.AspNetCore.Authentication;
@@ -15,18 +15,16 @@ public class CartController : ControllerBase
 {
     private ICartRepository _cartRepository;
     private ICouponRepository _couponRepository;
+
     private IRabbitMQMessageSender _rabbitMQMessageSender;
 
     public CartController(ICartRepository cartRepository, 
         ICouponRepository couponRepository, 
         IRabbitMQMessageSender rabbitMQMessageSender)
     {
-        _cartRepository = cartRepository ?? 
-            throw new ArgumentNullException(nameof(cartRepository));
-        _couponRepository = couponRepository ?? 
-            throw new ArgumentNullException(nameof(couponRepository));
-        _rabbitMQMessageSender = rabbitMQMessageSender ?? 
-            throw new ArgumentNullException(nameof(rabbitMQMessageSender));
+        _cartRepository = cartRepository ?? throw new ArgumentNullException(nameof(cartRepository));
+        _couponRepository = couponRepository ?? throw new ArgumentNullException(nameof(couponRepository));
+        _rabbitMQMessageSender = rabbitMQMessageSender ?? throw new ArgumentNullException(nameof(rabbitMQMessageSender));
     }
 
     [HttpGet("find-cart/{id}")]
@@ -80,20 +78,20 @@ public class CartController : ControllerBase
     [HttpPost("checkout")]
     public async Task<ActionResult<CheckouHeaderVO>> Checkout(CheckouHeaderVO vO)
     {
+        //string token = Request.Headers["Autorization"];
         var token = await HttpContext.GetTokenAsync("access_token");
+
         if (vO?.UserId == null) return NotFound("Teste de não encontrado");
         var cart = await _cartRepository.FindCartByUserId(vO.UserId);
         if (cart == null) return NotFound();
-        if(!string.IsNullOrEmpty(vO.CouponCode))
+        vO.CartDetails = cart.CartDetails;
+        vO.DateTime = DateTime.Now;
+
+        if (!string.IsNullOrEmpty(vO.CouponCode))
         {
             CouponVO coupon = await _couponRepository.GetCoupon(vO.CouponCode, token);
-
-            if (vO.DiscountAmount != coupon.DiscountAmount)
-            {
-                return StatusCode(412); 
-                //412 significa que já mudou as pré-condições antes estabelecidas
-                //(no caso, o preço do coupon já não é o mesmo mesmo que o cliente viu antes de seleciona-lo no carrinho) 
-            }
+            if (vO.DiscountAmount != coupon.DiscountAmount) 
+                return StatusCode(412); //Preconditoin Failed (no Caso, o valor do cuopon mudou)
         }
         vO.CartDetails = cart.CartDetails;
         vO.DateTime = DateTime.Now;

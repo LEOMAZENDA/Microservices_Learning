@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GreekShoping.ProductApi.Migrations
 {
     [DbContext(typeof(MySqlContext))]
-    [Migration("20240622221459_DBProductApiCreate")]
-    partial class DBProductApiCreate
+    [Migration("20240630071910_MaisUmProducto")]
+    partial class MaisUmProducto
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -110,6 +110,15 @@ namespace GreekShoping.ProductApi.Migrations
                             Description = "Camisola de homem para Jovens e Adultos ",
                             ImageUrl = "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/13_dragon_ball.jpg?raw=true",
                             Name = "Camisola Branca - Dragon Ball Z",
+                            Price = 7500.9m
+                        },
+                        new
+                        {
+                            Id = 10L,
+                            CategoryName = "Roupa",
+                            Description = "Camisola de homem para Jovens e Adultos ",
+                            ImageUrl = "~/prodsimages/1_super_mario.jpg",
+                            Name = "Camisola - Super Mário 2000",
                             Price = 7500.9m
                         });
                 });

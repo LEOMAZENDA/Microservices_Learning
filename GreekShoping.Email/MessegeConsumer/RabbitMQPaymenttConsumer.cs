@@ -12,8 +12,9 @@ namespace GreekShoping.Email.MessegeConsumer
         private readonly EmailRepository _repository;
         private IConnection _connection;
         private IModel _channel;
-        private const string ExchangeName = "FanoutPaymentUpdateExchange";
-        string queueName = string.Empty;
+        private const string ExchangeName = "DirectPaymentUpdateExchange";
+        private const string PaymentEmailUpdateQueueName = "PaymentEmailUpdateQueueName";
+
         public RabbitMQPaymenttConsumer(EmailRepository repository)
         {
             _repository = repository;
@@ -26,9 +27,9 @@ namespace GreekShoping.Email.MessegeConsumer
             _connection = fecttory.CreateConnection(); 
             _channel = _connection.CreateModel();
 
-            _channel.ExchangeDeclare(ExchangeName, ExchangeType.Fanout);
-            queueName = _channel.QueueDeclare().QueueName;
-            _channel.QueueBind(queueName, ExchangeName, string.Empty);
+            _channel.ExchangeDeclare(ExchangeName, ExchangeType.Direct);
+            _channel.QueueDeclare(PaymentEmailUpdateQueueName, false, false, false, null);
+            _channel.QueueBind(PaymentEmailUpdateQueueName, ExchangeName, "PaymentEmail");
         }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
@@ -43,7 +44,7 @@ namespace GreekShoping.Email.MessegeConsumer
                 ProcessLogs(messege).GetAwaiter().GetResult();
                 _channel.BasicAck(evt.DeliveryTag, false);
             };
-            _channel.BasicConsume(queueName, false, consumer);
+            _channel.BasicConsume(PaymentEmailUpdateQueueName, false, consumer);
             return Task.CompletedTask;
         }
 

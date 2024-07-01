@@ -12,7 +12,9 @@ public class RabbitMQMessageSender : IRabbitMQMessageSender
     private readonly string _userName;
     private readonly string _password;
     private IConnection _connection;
-    private const string ExchangeName = "FanoutPaymentUpdateExchange";
+    private const string ExchangeName = "DirectPaymentUpdateExchange";
+    private const string PaymentEmailUpdateQueueName = "PaymentEmailUpdateQueueName";
+    private const string PaymentOrderUpdateQueueName = "PaymentOrderUpdateQueueName";
 
     public RabbitMQMessageSender()
     {//Here we have de access date of RabbiitMQ
@@ -26,10 +28,16 @@ public class RabbitMQMessageSender : IRabbitMQMessageSender
         if (ConnectionExists())
         {
             using var channel = _connection.CreateModel();
-            channel.ExchangeDeclare(ExchangeName, ExchangeType.Fanout, durable: false);
+            channel.ExchangeDeclare(ExchangeName, ExchangeType.Direct, durable: false);
+
+            channel.QueueDeclare(PaymentEmailUpdateQueueName, false, false, false, null);
+            channel.QueueDeclare(PaymentOrderUpdateQueueName, false, false, false, null);
+            channel.QueueBind(PaymentEmailUpdateQueueName, ExchangeName, "PaymentEmail");
+            channel.QueueBind(PaymentOrderUpdateQueueName, ExchangeName, "PaymentOrder");
+
             byte[] body = GetMessageAsBytArray(message);
-            channel.BasicPublish(
-                exchange: ExchangeName, string.Empty, basicProperties: null, body: body);
+            channel.BasicPublish(exchange: ExchangeName, "PaymentEmail", basicProperties: null, body: body);
+            channel.BasicPublish(exchange: ExchangeName, "PaymentOrder", basicProperties: null, body: body);
         }
     }
 

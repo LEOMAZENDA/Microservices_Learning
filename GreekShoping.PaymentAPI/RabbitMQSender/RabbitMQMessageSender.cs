@@ -12,6 +12,7 @@ public class RabbitMQMessageSender : IRabbitMQMessageSender
     private readonly string _userName;
     private readonly string _password;
     private IConnection _connection;
+    private const string ExchangeName = "FanoutPaymentUpdateExchange";
 
     public RabbitMQMessageSender()
     {//Here we have de access date of RabbiitMQ
@@ -20,14 +21,15 @@ public class RabbitMQMessageSender : IRabbitMQMessageSender
         _password = "guest";
     }
 
-    public void SendeMessage(BaseMessage message, string queueName)
+    public void SendeMessage(BaseMessage message)
     {
         if (ConnectionExists())
         {
             using var channel = _connection.CreateModel();
-            channel.QueueDeclare(queue: queueName, false, false, false, arguments: null);
+            channel.ExchangeDeclare(ExchangeName, ExchangeType.Fanout, durable: false);
             byte[] body = GetMessageAsBytArray(message);
-            channel.BasicPublish(exchange: string.Empty, routingKey: queueName, basicProperties: null, body: body);
+            channel.BasicPublish(
+                exchange: ExchangeName, string.Empty, basicProperties: null, body: body);
         }
     }
 

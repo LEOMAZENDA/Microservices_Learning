@@ -58,7 +58,7 @@ namespace GreekShoping.PaymentAPI.MessegeConsumer
             };
             try
             {
-                _rabbitMQMessageSender.SendeMessage(paymentResult, "orderpaymentresultqueue");
+                _rabbitMQMessageSender.SendeMessage(paymentResult);
             }
             catch (Exception)
             {

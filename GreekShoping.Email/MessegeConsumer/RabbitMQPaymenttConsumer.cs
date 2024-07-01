@@ -1,20 +1,20 @@
-﻿using GreekShoping.OrderAPI.Messege;
-using GreekShoping.OrderAPI.Repository;
+﻿using GreekShoping.Email.Messege;
+using GreekShoping.Email.Repository;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 using System.Text;
 using System.Text.Json;
 
-namespace GreekShoping.OrderAPI.MessegeConsumer
+namespace GreekShoping.Email.MessegeConsumer
 {
     public class RabbitMQPaymenttConsumer : BackgroundService
     {
-        private readonly OrderRepository _repository;
+        private readonly EmailRepository _repository;
         private IConnection _connection;
         private IModel _channel;
         private const string ExchangeName = "FanoutPaymentUpdateExchange";
         string queueName = string.Empty;
-        public RabbitMQPaymenttConsumer(OrderRepository repository)
+        public RabbitMQPaymenttConsumer(EmailRepository repository)
         {
             _repository = repository;
             var fecttory = new ConnectionFactory
@@ -39,19 +39,19 @@ namespace GreekShoping.OrderAPI.MessegeConsumer
             consumer.Received += (chanel, evt) =>
             {
                 var content = Encoding.UTF8.GetString(evt.Body.ToArray());
-                UpdatePaymentResultVO vO = JsonSerializer.Deserialize<UpdatePaymentResultVO>(content);
-                UpdadePaymentStatus(vO).GetAwaiter().GetResult();
+                UpdatePaymentResultMessage messege = JsonSerializer.Deserialize<UpdatePaymentResultMessage>(content);
+                ProcessLogs(messege).GetAwaiter().GetResult();
                 _channel.BasicAck(evt.DeliveryTag, false);
             };
             _channel.BasicConsume(queueName, false, consumer);
             return Task.CompletedTask;
         }
 
-        private async Task UpdadePaymentStatus(UpdatePaymentResultVO vO)
+        private async Task ProcessLogs(UpdatePaymentResultMessage messege)
         {            
             try
             {
-                await _repository.UpdateOderPaymentStatus(vO.OrderId, vO.Status);
+                await _repository.LogEmail(messege);
             }
             catch (Exception)
             {

@@ -13,7 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.Web", "GreekSh
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.CartAPI", "GreekShoping.CartAPI\GreekShoping.CartAPI.csproj", "{4C577493-D8E6-48E7-A9E0-915F24BC4453}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. IdentitySecurityServer", "0. IdentitySecurityServer", "{B5617835-E084-4B6F-B24F-9C27D8B70E65}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "0. IdentityServer", "0. IdentityServer", "{B5617835-E084-4B6F-B24F-9C27D8B70E65}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.IdentityServer", "GreekShoping.IdentityServer\GreekShoping.IdentityServer.csproj", "{FFBE2138-E7AB-4911-BC21-CEF14FE7A656}"
 EndProject
@@ -27,9 +27,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.OrderAPI", "Gr
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Paymants", "4. Paymants", "{C6DF323C-9ABE-4CC6-93C7-4101895708A3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreekShoping,PaymentProcessor", "GreekShoping,PaymentProcessor\GreekShoping,PaymentProcessor.csproj", "{6E9F05B0-3D49-45E4-AA58-0BDBBC1D4469}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping,PaymentProcessor", "GreekShoping,PaymentProcessor\GreekShoping,PaymentProcessor.csproj", "{6E9F05B0-3D49-45E4-AA58-0BDBBC1D4469}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreekShoping.PaymentAPI", "GreekShoping.PaymentAPI\GreekShoping.PaymentAPI.csproj", "{CD3DD5DB-7165-4CA6-A9ED-EF6F843830A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.PaymentAPI", "GreekShoping.PaymentAPI\GreekShoping.PaymentAPI.csproj", "{CD3DD5DB-7165-4CA6-A9ED-EF6F843830A1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreekShoping.Email", "GreekShoping.Email\GreekShoping.Email.csproj", "{B807E9D5-1FC0-47DE-8EA0-571556F1C6E0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -73,6 +75,10 @@ Global
 		{CD3DD5DB-7165-4CA6-A9ED-EF6F843830A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CD3DD5DB-7165-4CA6-A9ED-EF6F843830A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CD3DD5DB-7165-4CA6-A9ED-EF6F843830A1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B807E9D5-1FC0-47DE-8EA0-571556F1C6E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B807E9D5-1FC0-47DE-8EA0-571556F1C6E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B807E9D5-1FC0-47DE-8EA0-571556F1C6E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B807E9D5-1FC0-47DE-8EA0-571556F1C6E0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -87,6 +93,7 @@ Global
 		{D801975E-86FD-4D9E-8B54-2127C79A7A08} = {E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}
 		{6E9F05B0-3D49-45E4-AA58-0BDBBC1D4469} = {C6DF323C-9ABE-4CC6-93C7-4101895708A3}
 		{CD3DD5DB-7165-4CA6-A9ED-EF6F843830A1} = {E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}
+		{B807E9D5-1FC0-47DE-8EA0-571556F1C6E0} = {E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECEAB0F8-F5F6-4882-9A11-5022F78C87AB}

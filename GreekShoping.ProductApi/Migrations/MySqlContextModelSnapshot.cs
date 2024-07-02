@@ -61,7 +61,7 @@ namespace GreekShoping.ProductApi.Migrations
                             Id = 4L,
                             CategoryName = "Brinquedos",
                             Description = "Mascara para festas",
-                            ImageUrl = "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/3_vader.jpg?raw=true",
+                            ImageUrl = "/prodsImages/3_vader.jpg",
                             Name = "Mascara Star Wars",
                             Price = 25000m
                         },
@@ -69,8 +69,8 @@ namespace GreekShoping.ProductApi.Migrations
                         {
                             Id = 5L,
                             CategoryName = "Roupa",
-                            Description = "Camisola de homem para Jovens e Adultos ",
-                            ImageUrl = "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/5_100_gamer.jpg?raw=true",
+                            Description = "Camisola de homem para Jovens e Adultos",
+                            ImageUrl = "/prodsImages/5_100_gamer.jpg",
                             Name = "Camisola Preta Gammer",
                             Price = 499.99m
                         },
@@ -78,8 +78,8 @@ namespace GreekShoping.ProductApi.Migrations
                         {
                             Id = 6L,
                             CategoryName = "Roupa",
-                            Description = "Camisola de homem para Jovens e Adultos ",
-                            ImageUrl = "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/6_spacex.jpg?raw=true",
+                            Description = "Camisola de homem para Jovens e Adultos",
+                            ImageUrl = "/prodsImages/6_spacex.jpg",
                             Name = "Camisola Branca e Preta SpaceX",
                             Price = 7500.9m
                         },
@@ -87,8 +87,8 @@ namespace GreekShoping.ProductApi.Migrations
                         {
                             Id = 7L,
                             CategoryName = "Roupa",
-                            Description = "Camisola de homem para Jovens e Adultos ",
-                            ImageUrl = "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/11_mars.jpg?raw=true",
+                            Description = "Camisola de homem para Jovens e Adultos",
+                            ImageUrl = "/prodsImages/11_mars.jpg",
                             Name = "Camisola Preta - Occupy Mar",
                             Price = 7500.9m
                         },
@@ -96,8 +96,8 @@ namespace GreekShoping.ProductApi.Migrations
                         {
                             Id = 8L,
                             CategoryName = "Roupa",
-                            Description = "Casaco de homem para Jovens e Adultos ",
-                            ImageUrl = "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/8_moletom_cobra_kay.jpg?raw=true",
+                            Description = "Casaco de homem para Jovens e Adultos",
+                            ImageUrl = "/prodsImages/8_moletom_cobra_kay.jpg",
                             Name = "Casaco Capuchinho Preto",
                             Price = 9580m
                         },
@@ -105,8 +105,8 @@ namespace GreekShoping.ProductApi.Migrations
                         {
                             Id = 9L,
                             CategoryName = "Roupa",
-                            Description = "Camisola de homem para Jovens e Adultos ",
-                            ImageUrl = "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/13_dragon_ball.jpg?raw=true",
+                            Description = "Camisola de homem para Jovens e Adultos",
+                            ImageUrl = "/prodsImages/13_dragon_ball.jpg",
                             Name = "Camisola Branca - Dragon Ball Z",
                             Price = 7500.9m
                         },
@@ -114,8 +114,8 @@ namespace GreekShoping.ProductApi.Migrations
                         {
                             Id = 10L,
                             CategoryName = "Roupa",
-                            Description = "Camisola de homem para Jovens e Adultos ",
-                            ImageUrl = "~/prodsimages/1_super_mario.jpg",
+                            Description = "Camisola de homem para Jovens e Adultos",
+                            ImageUrl = "/prodsImages/1_super_mario.jpg",
                             Name = "Camisola - Super Mário 2000",
                             Price = 7500.9m
                         });

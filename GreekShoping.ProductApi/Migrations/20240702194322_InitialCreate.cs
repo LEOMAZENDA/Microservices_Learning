@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace GreekShoping.ProductApi.Migrations
 {
-    public partial class DBProductApiCreate : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -39,12 +39,13 @@ namespace GreekShoping.ProductApi.Migrations
                 columns: new[] { "id", "category_name", "description", "image_url", "name", "price" },
                 values: new object[,]
                 {
-                    { 4L, "Brinquedos", "Mascara para festas", "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/3_vader.jpg?raw=true", "Mascara Star Wars", 25000m },
-                    { 5L, "Roupa", "Camisola de homem para Jovens e Adultos ", "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/5_100_gamer.jpg?raw=true", "Camisola Preta Gammer", 499.99m },
-                    { 6L, "Roupa", "Camisola de homem para Jovens e Adultos ", "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/6_spacex.jpg?raw=true", "Camisola Branca e Preta SpaceX", 7500.9m },
-                    { 7L, "Roupa", "Camisola de homem para Jovens e Adultos ", "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/11_mars.jpg?raw=true", "Camisola Preta - Occupy Mar", 7500.9m },
-                    { 8L, "Roupa", "Casaco de homem para Jovens e Adultos ", "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/8_moletom_cobra_kay.jpg?raw=true", "Casaco Capuchinho Preto", 9580m },
-                    { 9L, "Roupa", "Camisola de homem para Jovens e Adultos ", "https://github.com/LEOMAZENDA/Microservices_Learning/blob/master/GreekShoping/GreekShoping/ShoppingImages/13_dragon_ball.jpg?raw=true", "Camisola Branca - Dragon Ball Z", 7500.9m }
+                    { 4L, "Brinquedos", "Mascara para festas", "/prodsImages/3_vader.jpg", "Mascara Star Wars", 25000m },
+                    { 5L, "Roupa", "Camisola de homem para Jovens e Adultos", "/prodsImages/5_100_gamer.jpg", "Camisola Preta Gammer", 499.99m },
+                    { 6L, "Roupa", "Camisola de homem para Jovens e Adultos", "/prodsImages/6_spacex.jpg", "Camisola Branca e Preta SpaceX", 7500.9m },
+                    { 7L, "Roupa", "Camisola de homem para Jovens e Adultos", "/prodsImages/11_mars.jpg", "Camisola Preta - Occupy Mar", 7500.9m },
+                    { 8L, "Roupa", "Casaco de homem para Jovens e Adultos", "/prodsImages/8_moletom_cobra_kay.jpg", "Casaco Capuchinho Preto", 9580m },
+                    { 9L, "Roupa", "Camisola de homem para Jovens e Adultos", "/prodsImages/13_dragon_ball.jpg", "Camisola Branca - Dragon Ball Z", 7500.9m },
+                    { 10L, "Roupa", "Camisola de homem para Jovens e Adultos", "/prodsImages/1_super_mario.jpg", "Camisola - Super Mário 2000", 7500.9m }
                 });
         }
 

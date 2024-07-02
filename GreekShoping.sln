@@ -31,7 +31,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping,PaymentProcess
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.PaymentAPI", "GreekShoping.PaymentAPI\GreekShoping.PaymentAPI.csproj", "{CD3DD5DB-7165-4CA6-A9ED-EF6F843830A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreekShoping.Email", "GreekShoping.Email\GreekShoping.Email.csproj", "{B807E9D5-1FC0-47DE-8EA0-571556F1C6E0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GreekShoping.Email", "GreekShoping.Email\GreekShoping.Email.csproj", "{B807E9D5-1FC0-47DE-8EA0-571556F1C6E0}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gatway", "Gatway", "{9C77FA03-09CD-41DF-9E55-3B9715A9729B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GreekShoping.APIGateway", "GreekShoping.APIGateway\GreekShoping.APIGateway.csproj", "{685CF4FE-1808-4E74-B89E-899EE1EC0C8D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -79,6 +83,10 @@ Global
 		{B807E9D5-1FC0-47DE-8EA0-571556F1C6E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B807E9D5-1FC0-47DE-8EA0-571556F1C6E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B807E9D5-1FC0-47DE-8EA0-571556F1C6E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{685CF4FE-1808-4E74-B89E-899EE1EC0C8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{685CF4FE-1808-4E74-B89E-899EE1EC0C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{685CF4FE-1808-4E74-B89E-899EE1EC0C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{685CF4FE-1808-4E74-B89E-899EE1EC0C8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +102,7 @@ Global
 		{6E9F05B0-3D49-45E4-AA58-0BDBBC1D4469} = {C6DF323C-9ABE-4CC6-93C7-4101895708A3}
 		{CD3DD5DB-7165-4CA6-A9ED-EF6F843830A1} = {E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}
 		{B807E9D5-1FC0-47DE-8EA0-571556F1C6E0} = {E9DB13BC-D80E-4112-B7EE-07B8C3397B0E}
+		{685CF4FE-1808-4E74-B89E-899EE1EC0C8D} = {9C77FA03-09CD-41DF-9E55-3B9715A9729B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {ECEAB0F8-F5F6-4882-9A11-5022F78C87AB}

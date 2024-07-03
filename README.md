@@ -16,3 +16,18 @@ Antes de começar a mergulhar nesse projecto, certifique-se de ter os seguintes 
 - Experiência com desenvolvimento web
 - Visual Studio ou Visual Studio Code instalado
 - Docker instalado
+
+
+## Conteiner para subir no docker; 
+Execute o comando a baixo: 
+docker run -d --hostname my-rabbit --name some-rabbit -p 5672:15672 -p 5672:15672 rabbitmq:3-management
+
+Depois de instalado, em seu navegador, tens esses dados para acessar 
+
+localhost:15672          
+http://127.0.0.1:15672/ - isso para browser 
+
+User: guest
+Password: guest
+
+Obs: Testado no Edge

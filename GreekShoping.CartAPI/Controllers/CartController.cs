@@ -4,7 +4,6 @@ using GreekShoping.OrderAPI.RabbitMQSender;
 using GreekShoping.OrderAPI.Repository._Cart;
 using GreekShoping.OrderAPI.Repository._Coupon;
 using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GreekShoping.OrderAPI.Controllers;
